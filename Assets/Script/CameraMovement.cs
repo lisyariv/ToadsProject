@@ -9,7 +9,6 @@ public class CameraMovement : MonoBehaviour
     public float xRot = 0f;
     public float minY = -90f;
     public float maxY = 90f;
-    public float distanceFromCamera = -10f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +19,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.position + new Vector3(0, distanceFromCamera, 0);
+        Cursor.lockState = CursorLockMode.Locked;
         MouseLook();
     }
 
