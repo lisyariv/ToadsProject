@@ -360,7 +360,10 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   speed: 5
   jumpMovement: {x: 0, y: 600, z: 0}
+  flyMovement: {x: 0, y: 50, z: 0}
   canJump: 0
+  canFly: 0
+  player: {fileID: 1681563450}
 --- !u!65 &1681563452
 BoxCollider:
   m_ObjectHideFlags: 0
