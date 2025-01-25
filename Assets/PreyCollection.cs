@@ -10,13 +10,14 @@ public class PreyCollection : MonoBehaviour
     public TMP_Text infoTxt;
     public Slider bar;
     public IEnumerator collect;
-
     public float timer;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         bar.gameObject.SetActive(false);
+        bar.maxValue = 2f;
         infoTxt.text = "";
     }
 
@@ -28,11 +29,11 @@ public class PreyCollection : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Prey")
+        if(other.gameObject.tag == "Player")
         {
             infoTxt.text = "Collecting";
             bar.gameObject.SetActive(true);
-            //collect = Collecting();
+            collect = Collecting();
             StartCoroutine(collect);
         }
     }
@@ -41,11 +42,27 @@ public class PreyCollection : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             timer += Time.deltaTime;
+            
             bar.value = (timer / 2);
         }
     }
     void OnTriggerExit(Collider other)
     {
         StopCoroutine(collect);
+        infoTxt.text = "";
+        timer = 0;
+        bar.gameObject.SetActive(false);
+        bar.value = 0;
+
+
     }
+
+    public IEnumerator Collecting()
+    {
+        yield return new WaitForSeconds(2f);
+
+        Destroy(gameObject);
+        //gameObject.isCollected = true;
+    }
+
 }
