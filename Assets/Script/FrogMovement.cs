@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FrogMovement : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class FrogMovement : MonoBehaviour
     public bool canJump;
     public bool canFly;
     public GameObject player;
+    public Slider staminaBar;
+
     // Start is called before the first frame update
     void Start()
     {
+        staminaBar.gameObject.SetActive(false);
+        staminaBar.maxValue = 5f;
         canJump = false;
         canFly = false;
     }
@@ -21,7 +26,7 @@ public class FrogMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       /* if (player.transform.position.y > 10)
+      /* if (player.transform.position.y > 10)
         {
             canFly = false;
         }
