@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FrogMovement : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class FrogMovement : MonoBehaviour
     public bool canFly;
     public GameObject player;
     public Slider staminaBar;
+    public GM gameManager;
+    public TMP_Text StaminaTxt;
 
     // Start is called before the first frame update
     void Start()
     {
-        staminaBar.gameObject.SetActive(false);
+        staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
+        staminaBar.value = 0;
+        StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
     }
@@ -26,22 +31,14 @@ public class FrogMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-      /* if (player.transform.position.y > 10)
-        {
-            canFly = false;
-        }
-        else
-        {
-            canFly = true;
-        }*/
        //Moving left to right
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         moveDirection = new Vector3(x, 0, z);
         transform.Translate(moveDirection * Time.deltaTime * speed);
-        //Jumping 
 
+        //Jumping 
         if (canJump == true && Input.GetKey(KeyCode.Space))
         {
             canJump = false;
@@ -49,10 +46,16 @@ public class FrogMovement : MonoBehaviour
         }
 
         //Flying
-
         if (canFly == true && Input.GetKey(KeyCode.F))
         {
             GetComponent<Rigidbody>().AddForce(flyMovement);
+        }
+        //Adding to Stamina Bar
+        if(gameManager.preyCount == 1)
+        {
+            staminaBar.value += 1;
+            gameManager.preyCount = 0;
+            Debug.Log(staminaBar.value);
         }
     }
 

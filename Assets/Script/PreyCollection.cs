@@ -67,7 +67,6 @@ public class PreyCollection : MonoBehaviour
         GM.isCollected = true;
         GM.preyCount += 1;
         
-        //gameObject.isCollected = true;
     }
 
 }
