@@ -6,6 +6,7 @@ using TMPro;
 
 public class PreyCollection : MonoBehaviour
 {
+    public GM GM;
     public bool isCollected;
     public TMP_Text infoTxt;
     public Slider bar;
@@ -62,6 +63,10 @@ public class PreyCollection : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         Destroy(gameObject);
+
+        GM.isCollected = true;
+        GM.preyCount += 1;
+        
         //gameObject.isCollected = true;
     }
 
