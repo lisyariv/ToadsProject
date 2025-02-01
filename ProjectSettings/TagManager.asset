@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Prey
+  - StaminaBar
   layers:
   - Default
   - TransparentFX

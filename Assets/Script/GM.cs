@@ -6,7 +6,6 @@ using TMPro;
 
 public class GM : MonoBehaviour
 {
-
     public bool isCollected;
     public int preyCount;
     //public TMP_Text GameText;
