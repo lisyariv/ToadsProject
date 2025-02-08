@@ -7,12 +7,14 @@ using TMPro;
 public class GM : MonoBehaviour
 {
     public bool isCollected;
+    public bool isCollecting;
     public int preyCount;
     //public TMP_Text GameText;
     // Start is called before the first frame update
     void Start()
     {
         isCollected = false;
+        isCollecting = false;
         preyCount = 0;
 
     }

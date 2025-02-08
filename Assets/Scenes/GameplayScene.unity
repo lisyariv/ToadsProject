@@ -1778,6 +1778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  isCollecting: 0
   preyCount: 0
 --- !u!4 &1443012110
 Transform:
@@ -1920,7 +1921,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 1443012109}
-  isCollected: 0
   infoTxt: {fileID: 950958205}
   bar: {fileID: 1907747488}
   timer: 0
@@ -2234,10 +2234,11 @@ MonoBehaviour:
   flyMovement: {x: 0, y: 50, z: 0}
   canJump: 0
   canFly: 0
-  player: {fileID: 1681563450}
+  player: {fileID: 1681563456}
   staminaBar: {fileID: 1212046789}
   gameManager: {fileID: 1443012109}
   StaminaTxt: {fileID: 142906976}
+  onGround: 0
 --- !u!65 &1681563452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2924,7 +2925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 1443012109}
-  isCollected: 0
   infoTxt: {fileID: 653855716}
   bar: {fileID: 1475956460}
   timer: 0
@@ -3054,7 +3054,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 1443012109}
-  isCollected: 0
   infoTxt: {fileID: 484604244}
   bar: {fileID: 2118290848}
   timer: 0
