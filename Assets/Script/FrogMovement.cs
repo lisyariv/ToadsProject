@@ -17,6 +17,7 @@ public class FrogMovement : MonoBehaviour
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public bool onGround;
+   
     
     // Start is called before the first frame update
     void Start()
