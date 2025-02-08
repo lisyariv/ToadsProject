@@ -9,6 +9,7 @@ public class GM : MonoBehaviour
     public bool isCollected;
     public bool isCollecting;
     public int preyCount;
+    public bool isFlyCollected;
     //public TMP_Text GameText;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class GM : MonoBehaviour
         isCollected = false;
         isCollecting = false;
         preyCount = 0;
-
+        isFlyCollected = false;
     }
 
     // Update is called once per frame

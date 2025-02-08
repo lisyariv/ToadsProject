@@ -1780,6 +1780,7 @@ MonoBehaviour:
   isCollected: 0
   isCollecting: 0
   preyCount: 0
+  isFlyCollected: 0
 --- !u!4 &1443012110
 Transform:
   m_ObjectHideFlags: 0
@@ -1811,7 +1812,7 @@ GameObject:
   - component: {fileID: 1456123405}
   m_Layer: 0
   m_Name: Fly
-  m_TagString: Prey
+  m_TagString: fly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2891,7 +2892,7 @@ GameObject:
   - component: {fileID: 2096766774}
   m_Layer: 0
   m_Name: Fly (1)
-  m_TagString: Prey
+  m_TagString: fly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3020,7 +3021,7 @@ GameObject:
   - component: {fileID: 2102881245}
   m_Layer: 0
   m_Name: Fly (2)
-  m_TagString: Prey
+  m_TagString: fly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

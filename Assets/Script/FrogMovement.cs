@@ -17,6 +17,7 @@ public class FrogMovement : MonoBehaviour
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public bool onGround;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class FrogMovement : MonoBehaviour
         canJump = false;
         canFly = false;
         onGround = false;
+        
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class FrogMovement : MonoBehaviour
             }
 
             //Flying
-            if (canFly == true && Input.GetKey(KeyCode.F))
+            if (canFly == true && gameManager.isFlyCollected == true && Input.GetKey(KeyCode.F))
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
             }

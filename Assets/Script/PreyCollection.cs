@@ -67,6 +67,13 @@ public class PreyCollection : MonoBehaviour
         Destroy(gameObject);
         GM.isCollecting = false;
         GM.isCollected = true;
+
+        if(gameObject.tag == "fly")
+        {
+            GM.isFlyCollected = true;
+            Debug.Log("The Fly has been collected.");
+        }
+
         GM.preyCount += 1;
         
     }
