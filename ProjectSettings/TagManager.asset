@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Prey
   - StaminaBar
+  - fly
   layers:
   - Default
   - TransparentFX

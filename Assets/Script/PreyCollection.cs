@@ -7,7 +7,6 @@ using TMPro;
 public class PreyCollection : MonoBehaviour
 {
     public GM GM;
-    public bool isCollected;
     public TMP_Text infoTxt;
     public Slider bar;
     public IEnumerator collect;
@@ -36,6 +35,7 @@ public class PreyCollection : MonoBehaviour
             bar.gameObject.SetActive(true);
             collect = Collecting();
             StartCoroutine(collect);
+            GM.isCollecting = true;
         }
     }
     void OnTriggerStay(Collider other)
@@ -46,6 +46,8 @@ public class PreyCollection : MonoBehaviour
             
             bar.value = (timer / 2);
         }
+        GM.isCollecting = true;
+        other.gameObject.transform.position = transform.position;
     }
     void OnTriggerExit(Collider other)
     {
@@ -54,17 +56,24 @@ public class PreyCollection : MonoBehaviour
         timer = 0;
         bar.gameObject.SetActive(false);
         bar.value = 0;
-
-
+        GM.isCollecting = false;
     }
 
     public IEnumerator Collecting()
     {
         yield return new WaitForSeconds(2f);
+       
 
         Destroy(gameObject);
-
+        GM.isCollecting = false;
         GM.isCollected = true;
+
+        if(gameObject.tag == "fly")
+        {
+            GM.isFlyCollected = true;
+            Debug.Log("The Fly has been collected.");
+        }
+
         GM.preyCount += 1;
         
     }

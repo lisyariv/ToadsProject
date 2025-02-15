@@ -12,11 +12,13 @@ public class FrogMovement : MonoBehaviour
     public Vector3 flyMovement;
     public bool canJump;
     public bool canFly;
-    public GameObject player;
+    public Rigidbody player;
     public Slider staminaBar;
     public GM gameManager;
     public TMP_Text StaminaTxt;
-
+    public bool onGround;
+   
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,30 +28,43 @@ public class FrogMovement : MonoBehaviour
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
+        onGround = false;
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
        //Moving left to right
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
-
-        moveDirection = new Vector3(x, 0, z);
-        transform.Translate(moveDirection * Time.deltaTime * speed);
-
-        //Jumping 
-        if (canJump == true && Input.GetKey(KeyCode.Space))
+       if(gameManager.isCollecting == false)
         {
-            canJump = false;
-            GetComponent<Rigidbody>().AddForce(jumpMovement);
-        }
+            player.isKinematic = false;
 
-        //Flying
-        if (canFly == true && Input.GetKey(KeyCode.F))
-        {
-            GetComponent<Rigidbody>().AddForce(flyMovement);
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+
+            moveDirection = new Vector3(x, 0, z);
+            transform.Translate(moveDirection * Time.deltaTime * speed);
+
+            //Jumping 
+            if (canJump == true && Input.GetKey(KeyCode.Space))
+            {
+                canJump = false;
+                GetComponent<Rigidbody>().AddForce(jumpMovement);
+            }
+
+            //Flying
+            if (canFly == true && gameManager.isFlyCollected == true && Input.GetKey(KeyCode.F))
+            {
+                GetComponent<Rigidbody>().AddForce(flyMovement);
+            }
         }
+       else if(onGround == false && gameManager.isCollecting == true)
+        {
+            player.isKinematic = true;
+        }
+       
+       
         //Adding to Stamina Bar
         if(gameManager.preyCount == 1)
         {
@@ -65,6 +80,7 @@ public class FrogMovement : MonoBehaviour
         {
             canJump = true;
             canFly = true;
+            onGround = true;
         }
     }
     
