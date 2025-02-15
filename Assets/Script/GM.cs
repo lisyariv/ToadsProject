@@ -8,6 +8,7 @@ public class GM : MonoBehaviour
 {
     public bool isCollected;
     public bool isCollecting;
+    public bool isInBush;
     public int preyCount;
     public bool isFlyCollected;
     public bool isNightTime;
@@ -18,6 +19,7 @@ public class GM : MonoBehaviour
     {
         isCollected = false;
         isCollecting = false;
+        isInBush = false;
         preyCount = 0;
         isFlyCollected = false;
         isNightTime = false;

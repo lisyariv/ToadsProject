@@ -8,6 +8,7 @@ TagManager:
   - Prey
   - StaminaBar
   - fly
+  - Bush
   layers:
   - Default
   - TransparentFX

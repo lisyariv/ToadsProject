@@ -9,10 +9,12 @@ public class EnemyDetectionScript : MonoBehaviour
     public TMP_Text status;
     public float attackTimer;
     public IEnumerator attack;
+    public GM gameManager;
     // Start is called before the first frame update
     void Start()
     {
         status = GameObject.Find("Status").GetComponent<TMP_Text>();
+        status.text = "";
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class EnemyDetectionScript : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && gameManager.isInBush == false )
         {
             status.text = "You have been Spotted";
             //attack
@@ -37,4 +39,6 @@ public class EnemyDetectionScript : MonoBehaviour
 
         }
     }
+
+    
 }
