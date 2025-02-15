@@ -82,6 +82,11 @@ public class FrogMovement : MonoBehaviour
             canFly = true;
             onGround = true;
         }
+
+        if(collision.gameObject.tag == "Bush")
+        {
+            gameManager.isInBush = true;
+        }
     }
     
 }
