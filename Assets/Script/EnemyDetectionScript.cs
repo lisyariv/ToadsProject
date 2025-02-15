@@ -10,6 +10,7 @@ public class EnemyDetectionScript : MonoBehaviour
     public float attackTimer;
     public IEnumerator attack;
     public GM gameManager;
+    public GameObject 
     // Start is called before the first frame update
     void Start()
     {
