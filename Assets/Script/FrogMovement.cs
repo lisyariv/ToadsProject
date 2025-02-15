@@ -24,7 +24,7 @@ public class FrogMovement : MonoBehaviour
     {
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
-        staminaBar.value = 0;
+        staminaBar.value = 0.1f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
@@ -36,7 +36,7 @@ public class FrogMovement : MonoBehaviour
     void FixedUpdate()
     {
        //Moving left to right
-       if(gameManager.isCollecting == false)
+       if(gameManager.isCollecting == false && staminaBar.value > 0f)
         {
             player.isKinematic = false;
 
@@ -71,6 +71,11 @@ public class FrogMovement : MonoBehaviour
             staminaBar.value += 1;
             gameManager.preyCount = 0;
             Debug.Log(staminaBar.value);
+        }
+
+        if(staminaBar.value <= 0)
+        {
+            gameManager.GameText.text = "You became the predator's next meal.Try again?";
         }
     }
 

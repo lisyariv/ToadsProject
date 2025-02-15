@@ -31,15 +31,25 @@ public class GM : MonoBehaviour
     {
         WorldTime += Time.deltaTime;
         TimeInGame();
+
+        if(isFlyCollected == true)
+        {
+            GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air.";
+        }
     }
 
     void TimeInGame()
     {
-        if(WorldTime >= 100f)
+        if(WorldTime == 100f)
         {
             isNightTime = true;
             GameText.text = "It is night time. Find shelter!";
             Debug.Log("It is night time. Find shelter!");
+        }
+
+        if(WorldTime == 130f)
+        {
+            GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
         }
     }
 }

@@ -33,7 +33,7 @@ public class EnemyDetectionScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && gameManager.isInBush == false )
         {
-            status.text = "You have been Spotted";
+            status.text = "You were detected by a predator! Run to a hiding place to lose their focus on you";
 
             attackTimer += Time.deltaTime;
             if (attackTimer >= 4f)
