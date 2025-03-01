@@ -40,7 +40,7 @@ public class EnemyDetectionScript : MonoBehaviour
             }
             if (gameManager.isInBush == false)
             {
-                status.text = "You were detected by a predator! Run to a hiding place to lose their focus on you";
+                status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
 
                 attackTimer += Time.deltaTime;
                 if (attackTimer >= 2f)
