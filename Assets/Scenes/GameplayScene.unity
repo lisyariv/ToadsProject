@@ -2136,7 +2136,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 45.60395, y: -41.085938, z: 5.0787354, w: -58.724}
+  m_margin: {x: 52.444786, y: -32.107162, z: 16.723358, w: -50.20894}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3684,7 +3684,7 @@ MonoBehaviour:
   isFlyCollected: 0
   isNightTime: 0
   inShelter: 0
-  WorldTime: 80
+  WorldTime: 0
   preyCount: 0
   GameText: {fileID: 1086186745}
   KeysText: {fileID: 793382871}
