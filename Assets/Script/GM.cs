@@ -9,11 +9,15 @@ public class GM : MonoBehaviour
     public bool isCollected;
     public bool isCollecting;
     public bool isInBush;
-    public int preyCount;
     public bool isFlyCollected;
     public bool isNightTime;
+    public bool inShelter;
+
     public float WorldTime;
+    public int preyCount;
     public TMP_Text GameText;
+    public FrogMovement frog;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +35,33 @@ public class GM : MonoBehaviour
     {
         WorldTime += Time.deltaTime;
         TimeInGame();
-
-        if(isFlyCollected == true)
-        {
-            GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air.";
-        }
     }
 
     void TimeInGame()
     {
-        if(WorldTime == 100f)
+        if (isFlyCollected == true)
+        {
+            GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air.";
+        }
+
+        if (frog.staminaBar.value < 0.1f)
+        {
+            GameText.text = "You became the predator's next meal. Try again?";
+            Debug.Log("ur dead.");
+        }
+
+        if (WorldTime >= 100f)
         {
             isNightTime = true;
             GameText.text = "It is night time. Find shelter!";
-            Debug.Log("It is night time. Find shelter!");
+
+            if (inShelter == true)
+            {
+                GameText.text = "You found shelter and were able to complete the first day!";
+            }
         }
 
-        if(WorldTime == 130f)
+        if(WorldTime >= 130 && inShelter == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
         }

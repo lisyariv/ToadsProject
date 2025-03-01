@@ -31,17 +31,25 @@ public class EnemyDetectionScript : MonoBehaviour
     }
    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && gameManager.isInBush == false )
+        if (other.gameObject.tag == "Player")
         {
-            status.text = "You were detected by a predator! Run to a hiding place to lose their focus on you";
-
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= 4f)
+            if (gameManager.isInBush == true)
             {
-                frog.staminaBar.value -= 1;
+                status.text = "";
                 attackTimer = 0;
             }
+            if (gameManager.isInBush == false)
+            {
+                status.text = "You were detected by a predator! Run to a hiding place to lose their focus on you";
 
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= 2f)
+                {
+                    frog.staminaBar.value -= 1;
+                    Debug.Log(frog.staminaBar.value);
+                    attackTimer = 0;
+                }
+            }
         }
     }
     void OnTriggerExit(Collider other)

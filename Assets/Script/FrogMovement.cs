@@ -17,6 +17,7 @@ public class FrogMovement : MonoBehaviour
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public bool onGround;
+    
    
     
     // Start is called before the first frame update
@@ -72,13 +73,28 @@ public class FrogMovement : MonoBehaviour
             gameManager.preyCount = 0;
             Debug.Log(staminaBar.value);
         }
-
-        if(staminaBar.value <= 0)
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bush")
         {
-            gameManager.GameText.text = "You became the predator's next meal.Try again?";
+            gameManager.isInBush = true;
         }
     }
-
+    void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Bush")
+        {
+            gameManager.isInBush = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Bush")
+        {
+            gameManager.isInBush = false;
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
@@ -87,11 +103,11 @@ public class FrogMovement : MonoBehaviour
             canFly = true;
             onGround = true;
         }
-
-        if(collision.gameObject.tag == "Bush")
+        if(collision.gameObject.tag == "Shelter")
         {
-            gameManager.isInBush = true;
+            gameManager.inShelter = true;
         }
     }
+
     
 }
