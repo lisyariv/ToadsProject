@@ -17,6 +17,12 @@ public class FrogMovement : MonoBehaviour
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public bool onGround;
+
+    public List<Sprite> frogSprites;
+    public SpriteRenderer frogRenderer;
+    public bool isFacingRight;
+
+    
     
    
     
@@ -47,6 +53,28 @@ public class FrogMovement : MonoBehaviour
             moveDirection = new Vector3(x, 0, z);
             transform.Translate(moveDirection * Time.deltaTime * speed);
 
+            if (x == 0 && z == 0)
+            {
+                frogRenderer.sprite = frogSprites[0];
+            }
+            else if (z > 0)
+            {
+                frogRenderer.sprite = frogSprites[2];
+            }
+            else if (x > 0)
+            {
+                frogRenderer.sprite = frogSprites[1];
+                isFacingRight = false;
+            }
+            else if (x < 0)
+            {
+                frogRenderer.sprite = frogSprites[1];
+                if(isFacingRight == false)
+                {
+                    frogRenderer.flipX = true;
+                }
+                isFacingRight = true;
+            }
             //Jumping 
             if (canJump == true && Input.GetKey(KeyCode.Space))
             {
