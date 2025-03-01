@@ -627,7 +627,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &164247970
@@ -3062,7 +3062,7 @@ GameObject:
   - component: {fileID: 1097016542}
   - component: {fileID: 1097016541}
   m_Layer: 5
-  m_Name: TaskPanel
+  m_Name: ControlPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3109,7 +3109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a2bee89f78420b043a17899fb07327bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0d9b2738d4d9174fa8f42030225f864, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
