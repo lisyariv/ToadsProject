@@ -53,28 +53,43 @@ public class FrogMovement : MonoBehaviour
             moveDirection = new Vector3(x, 0, z);
             transform.Translate(moveDirection * Time.deltaTime * speed);
 
-            if (x == 0 && z == 0)
+           if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 frogRenderer.sprite = frogSprites[0];
             }
-            else if (z > 0)
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 frogRenderer.sprite = frogSprites[2];
             }
-            else if (x > 0)
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 frogRenderer.sprite = frogSprites[1];
-                isFacingRight = false;
             }
-            else if (x < 0)
-            {
-                frogRenderer.sprite = frogSprites[1];
-                if(isFacingRight == false)
-                {
-                    frogRenderer.flipX = true;
-                }
-                isFacingRight = true;
-            }
+            /*
+                        if (x == 0 && z == 0)
+                        {
+                            frogRenderer.sprite = frogSprites[0];
+                        }
+                        else if (z > 0)
+                        {
+                            frogRenderer.sprite = frogSprites[2];
+                        }
+                        else if (x > 0)
+                        {
+                            frogRenderer.sprite = frogSprites[1];
+                            isFacingRight = false;
+                        }
+                        else if (x < 0)
+                        {
+                            frogRenderer.sprite = frogSprites[1];
+                            if(isFacingRight == false)
+                            {
+                                frogRenderer.flipX = true;
+                            }
+                            isFacingRight = true;
+                        }*/
             //Jumping 
             if (canJump == true && Input.GetKey(KeyCode.Space))
             {
