@@ -21,11 +21,6 @@ public class FrogMovement : MonoBehaviour
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
     public bool isFacingRight;
-
-    
-    
-   
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +61,12 @@ public class FrogMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 frogRenderer.sprite = frogSprites[1];
+                frogRenderer.flipX = false;
+            }
+            if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                frogRenderer.sprite = frogSprites[1];
+                frogRenderer.flipX = true;
             }
             /*
                         if (x == 0 && z == 0)
@@ -151,6 +152,4 @@ public class FrogMovement : MonoBehaviour
             gameManager.inShelter = true;
         }
     }
-
-    
 }
