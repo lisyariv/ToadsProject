@@ -12,7 +12,7 @@ public class FrogMovement : MonoBehaviour
 
     public float speed = 5.0f;
     public float timer;
-    public float timer1;
+    //public float timer1;
 
     public bool canJump;
     public bool canFly;
@@ -33,7 +33,7 @@ public class FrogMovement : MonoBehaviour
     {
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
-        staminaBar.value = 0.1f;
+        staminaBar.value = 0.01f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
@@ -121,12 +121,7 @@ public class FrogMovement : MonoBehaviour
             if (canFly == true && gameManager.isFlyCollected == true && Input.GetKey(KeyCode.F))
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
-                timer1 += Time.deltaTime;
-                if (timer1 >= 2f)
-                {
-                    staminaBar.value -= 0.5f;
-                    timer1 = 0;
-                }
+                staminaBar.value -= 0.01f;
             }
 
             //Speeding

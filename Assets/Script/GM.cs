@@ -67,7 +67,7 @@ public class GM : MonoBehaviour
             isGameFinished = true;
         }
 
-        if(preyCount >= 5)
+        if (preyCount >= 5 && deadFrog == false)
         {
             GameText.text = "Now, interact with the predators to see if you'll obtain an ability. But, be careful!";
         }
