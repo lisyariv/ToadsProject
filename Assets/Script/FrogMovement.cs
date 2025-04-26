@@ -12,6 +12,7 @@ public class FrogMovement : MonoBehaviour
     public Vector3 flyMovement;
     public bool canJump;
     public bool canFly;
+    public bool canSpeed;
     public Rigidbody player;
     public Slider staminaBar;
     public GM gameManager;
@@ -31,6 +32,7 @@ public class FrogMovement : MonoBehaviour
         canJump = false;
         canFly = false;
         onGround = false;
+        canSpeed = false;
         
     }
 
@@ -38,7 +40,7 @@ public class FrogMovement : MonoBehaviour
     void FixedUpdate()
     {
        //Moving left to right
-       if(gameManager.isCollecting == false && staminaBar.value > 0f)
+       if(gameManager.isCollecting == false && gameManager.deadFrog == false) 
         {
             player.isKinematic = false;
 
@@ -103,6 +105,16 @@ public class FrogMovement : MonoBehaviour
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
             }
+
+            //Speeding
+            if(canSpeed == true && Input.GetKey(KeyCode.E))
+            {
+                speed = 10f;
+            }
+            else
+            {
+                speed = 5f;
+            }
         }
        else if(onGround == false && gameManager.isCollecting == true)
         {
@@ -111,10 +123,10 @@ public class FrogMovement : MonoBehaviour
        
        
         //Adding to Stamina Bar
-        if(gameManager.preyCount == 1)
+        if(gameManager.preyCount >= 1 && gameManager.isCollected == true)
         {
+            gameManager.isCollected = false;
             staminaBar.value += 1;
-            gameManager.preyCount = 0;
             Debug.Log(staminaBar.value);
         }
     }
@@ -123,6 +135,11 @@ public class FrogMovement : MonoBehaviour
         if (other.gameObject.tag == "Bush")
         {
             gameManager.isInBush = true;
+        }
+
+        if(other.gameObject.tag == "Predator")
+        {
+            canSpeed = true;
         }
     }
     void OnTriggerStay(Collider other)

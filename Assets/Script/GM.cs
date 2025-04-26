@@ -12,6 +12,7 @@ public class GM : MonoBehaviour
     public bool isFlyCollected;
     public bool isNightTime;
     public bool inShelter;
+    public bool deadFrog;
 
     public float WorldTime;
     public int preyCount;
@@ -27,6 +28,7 @@ public class GM : MonoBehaviour
         isCollected = false;
         isCollecting = false;
         isInBush = false;
+        deadFrog = false;
         preyCount = 0;
         isFlyCollected = false;
         isNightTime = false;
@@ -50,13 +52,34 @@ public class GM : MonoBehaviour
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly.";
         }
 
-        if (frog.staminaBar.value < 0.1f)
+        if(frog.canSpeed == true)
         {
+            KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly, E to speed up.";
+        }
+
+        if (frog.staminaBar.value <= 0f && preyCount >= 1)
+        {
+            deadFrog = true;
             GameText.text = "You became the predator's next meal. Try again?";
             Debug.Log("ur dead.");
         }
 
-        if (WorldTime >= 100f && WorldTime <= 130f)
+        if(preyCount >= 5)
+        {
+            GameText.text = "Now, interact with the predators to see if you'll obtain an ability. But, be careful!";
+        }
+
+        if(frog.staminaBar.value == 1.1f)
+        {
+            frog.staminaBar.value -= 0.1f;
+        }
+
+        if(frog.canSpeed == true)
+        {
+            GameText.text = "You can speed up now by pressing E and a walking button simultaneously.";
+        }
+
+        if (WorldTime >= 70f && WorldTime <= 130f)
         {
             isNightTime = true;
             GameText.text = "It is night time. Find shelter!";
@@ -67,7 +90,7 @@ public class GM : MonoBehaviour
             }
         }
 
-        if(WorldTime >= 130f && inShelter == false)
+        if(WorldTime >= 110f && inShelter == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
         }
