@@ -82,7 +82,7 @@ public class GM : MonoBehaviour
             GameText.text = "You can speed up now by pressing E and a walking button simultaneously.";
         }
 
-        if (WorldTime >= 70f && WorldTime <= 110f)
+        if (WorldTime >= 100f && WorldTime <= 150f)
         {
             isNightTime = true;
             GameText.text = "It is night time. Find shelter!";
@@ -94,7 +94,7 @@ public class GM : MonoBehaviour
             }
         }
 
-        if(WorldTime >= 110f && inShelter == false)
+        if(WorldTime >= 150f && inShelter == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
             isGameFinished = true;

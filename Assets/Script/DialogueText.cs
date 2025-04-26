@@ -12,7 +12,8 @@ public class DialogueText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Dialogue.text = "";
+        Dialogue.text = DialogueTxt[0];
+        index = 1;
     }
 
     // Update is called once per frame

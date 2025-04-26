@@ -22,6 +22,11 @@ public class NextScene : MonoBehaviour
         SceneManager.LoadScene("GameplayScene");
     }
 
+    public void Backstory()
+    {
+        SceneManager.LoadScene("BackstoryScene");
+    }
+
     public void Settings()
     {
         SceneManager.LoadScene("SettingsScene");
