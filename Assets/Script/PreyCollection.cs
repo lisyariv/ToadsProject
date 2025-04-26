@@ -19,7 +19,7 @@ public class PreyCollection : MonoBehaviour
     void Start()
     {
         bar.gameObject.SetActive(false);
-        bar.maxValue = 2f;
+        bar.maxValue = 1f;
         infoTxt.text = "";
         
     }
