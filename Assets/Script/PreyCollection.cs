@@ -11,8 +11,7 @@ public class PreyCollection : MonoBehaviour
     public Slider bar;
     public IEnumerator collect;
     public float timer;
-    public AudioSource gameAudio;
-    public List<AudioClip> gameSounds;
+    
 
 
     // Start is called before the first frame update
@@ -34,8 +33,7 @@ public class PreyCollection : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            gameAudio.clip = gameSounds[0];
-            gameAudio.Play();
+            
             infoTxt.text = "Collecting";
             bar.gameObject.SetActive(true);
             collect = Collecting();
