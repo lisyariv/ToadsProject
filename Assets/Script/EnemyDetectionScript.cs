@@ -15,6 +15,7 @@ public class EnemyDetectionScript : MonoBehaviour
     public AudioSource enemyAudio;
     public AudioClip enemySound;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,8 @@ public class EnemyDetectionScript : MonoBehaviour
         hp = frog.staminaBar.value;
         gameManager = GameObject.Find("GameManager").GetComponent<GM>();
         
+
+
 
 
     }
@@ -41,6 +44,8 @@ public class EnemyDetectionScript : MonoBehaviour
         {
             enemyAudio.clip = enemySound;
             enemyAudio.Play();
+            gameManager.backgroundAudio.Stop();
+
         }
     }
    void OnTriggerStay(Collider other)
@@ -74,12 +79,11 @@ public class EnemyDetectionScript : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         enemyAudio.Stop();
+        gameManager.backgroundAudio.Play();
         if (other.gameObject.tag == "Player")
         {
             status.text = "";
             attackTimer = 0;
-            
-
         }
     }
 
