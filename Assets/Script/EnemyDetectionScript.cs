@@ -12,7 +12,9 @@ public class EnemyDetectionScript : MonoBehaviour
     public GM gameManager;
     public FrogMovement frog;
     public float hp;
-    
+    public AudioSource enemyAudio;
+    public AudioClip enemySound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class EnemyDetectionScript : MonoBehaviour
         status.text = "";
         hp = frog.staminaBar.value;
         gameManager = GameObject.Find("GameManager").GetComponent<GM>();
+        
+
 
     }
 
@@ -28,18 +32,33 @@ public class EnemyDetectionScript : MonoBehaviour
     void Update()
     {
         
+        
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            enemyAudio.clip = enemySound;
+            enemyAudio.Play();
+        }
     }
    void OnTriggerStay(Collider other)
     {
+        
         if (other.gameObject.tag == "Player")
         {
+            
+            
             if (gameManager.isInBush == true)
             {
                 status.text = "";
                 attackTimer = 0;
+                
             }
             if (gameManager.isInBush == false)
             {
+                
                 status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
 
                 attackTimer += Time.deltaTime;
@@ -54,10 +73,13 @@ public class EnemyDetectionScript : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        enemyAudio.Stop();
         if (other.gameObject.tag == "Player")
         {
             status.text = "";
             attackTimer = 0;
+            
+
         }
     }
 

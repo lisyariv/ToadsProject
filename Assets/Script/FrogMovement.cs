@@ -17,6 +17,7 @@ public class FrogMovement : MonoBehaviour
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public bool onGround;
+    
 
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
@@ -107,6 +108,7 @@ public class FrogMovement : MonoBehaviour
        else if(onGround == false && gameManager.isCollecting == true)
         {
             player.isKinematic = true;
+            
         }
        
        
