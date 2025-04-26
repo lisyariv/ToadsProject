@@ -7,21 +7,26 @@ using TMPro;
 public class FrogMovement : MonoBehaviour
 {
     public Vector3 moveDirection;
-    public float speed = 5.0f;
     public Vector3 jumpMovement;
     public Vector3 flyMovement;
+
+    public float speed = 5.0f;
+    public float timer;
+   
     public bool canJump;
     public bool canFly;
     public bool canSpeed;
+    public bool onGround;
+    public bool isFacingRight;
+    public bool frogSwitch;
+
     public Rigidbody player;
     public Slider staminaBar;
     public GM gameManager;
     public TMP_Text StaminaTxt;
-    public bool onGround;
-
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
-    public bool isFacingRight;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +38,15 @@ public class FrogMovement : MonoBehaviour
         canFly = false;
         onGround = false;
         canSpeed = false;
+        frogSwitch = false;
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       //Moving left to right
-       if(gameManager.isCollecting == false && gameManager.deadFrog == false) 
+        //Moving left to right
+        if (gameManager.isCollecting == false && gameManager.deadFrog == false && gameManager.isGameFinished == false) 
         {
             player.isKinematic = false;
 
@@ -52,47 +58,57 @@ public class FrogMovement : MonoBehaviour
 
            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                frogRenderer.sprite = frogSprites[0];
+               
+                if(frogSwitch == true)
+                {
+                    frogRenderer.sprite = frogSprites[3];
+                }
+                else
+                {
+                    frogRenderer.sprite = frogSprites[0];
+                }
             }
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                frogRenderer.sprite = frogSprites[2];
+                
+                if (frogSwitch == true)
+                {
+                    frogRenderer.sprite = frogSprites[5];
+                }
+                else
+                {
+                    frogRenderer.sprite = frogSprites[2];
+                }
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                frogRenderer.sprite = frogSprites[1];
+               
+                if (frogSwitch == true)
+                {
+                    frogRenderer.sprite = frogSprites[4];
+                }
+                else
+                {
+                    frogRenderer.sprite = frogSprites[1];
+                }
                 frogRenderer.flipX = false;
             }
             if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                frogRenderer.sprite = frogSprites[1];
+
+                if (frogSwitch == true)
+                {
+                    frogRenderer.sprite = frogSprites[4];
+                }
+                else
+                {
+                    frogRenderer.sprite = frogSprites[1];
+                }
                 frogRenderer.flipX = true;
             }
-            /*
-                        if (x == 0 && z == 0)
-                        {
-                            frogRenderer.sprite = frogSprites[0];
-                        }
-                        else if (z > 0)
-                        {
-                            frogRenderer.sprite = frogSprites[2];
-                        }
-                        else if (x > 0)
-                        {
-                            frogRenderer.sprite = frogSprites[1];
-                            isFacingRight = false;
-                        }
-                        else if (x < 0)
-                        {
-                            frogRenderer.sprite = frogSprites[1];
-                            if(isFacingRight == false)
-                            {
-                                frogRenderer.flipX = true;
-                            }
-                            isFacingRight = true;
-                        }*/
+
             //Jumping 
             if (canJump == true && Input.GetKey(KeyCode.Space))
             {
@@ -109,11 +125,19 @@ public class FrogMovement : MonoBehaviour
             //Speeding
             if(canSpeed == true && Input.GetKey(KeyCode.E))
             {
+                frogSwitch = true;
                 speed = 10f;
+                timer += Time.deltaTime;
+                if(timer >= 2f)
+                {
+                    staminaBar.value -= 0.5f;
+                    timer = 0;
+                }
             }
             else
             {
                 speed = 5f;
+                frogSwitch = false;
             }
         }
        else if(onGround == false && gameManager.isCollecting == true)
@@ -135,11 +159,6 @@ public class FrogMovement : MonoBehaviour
         if (other.gameObject.tag == "Bush")
         {
             gameManager.isInBush = true;
-        }
-
-        if(other.gameObject.tag == "Predator")
-        {
-            canSpeed = true;
         }
     }
     void OnTriggerStay(Collider other)
@@ -167,6 +186,11 @@ public class FrogMovement : MonoBehaviour
         if(collision.gameObject.tag == "Shelter")
         {
             gameManager.inShelter = true;
+        }
+
+        if (collision.gameObject.tag == "Predator")
+        {
+            canSpeed = true;
         }
     }
 }
