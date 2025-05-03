@@ -1222,7 +1222,6 @@ MonoBehaviour:
   flyMovement: {x: 0, y: 50, z: 0}
   speed: 5
   timer: 0
-  timer1: 0
   canJump: 0
   canFly: 0
   canSpeed: 0
@@ -3920,8 +3919,6 @@ MonoBehaviour:
   infoTxt: {fileID: 174247819}
   bar: {fileID: 366422708}
   timer: 0
-  gameAudio: {fileID: 0}
-  gameSounds: []
 --- !u!65 &654392661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8325,6 +8322,8 @@ MonoBehaviour:
   GameText: {fileID: 1086186745}
   KeysText: {fileID: 793382871}
   frog: {fileID: 164247972}
+  backgroundAudio: {fileID: 1443012111}
+  backgroundSound: {fileID: 8300000, guid: f4de9c6b3cb9ab944ae539636e55bd62, type: 3}
 --- !u!4 &1443012110
 Transform:
   m_ObjectHideFlags: 0
@@ -8565,8 +8564,6 @@ MonoBehaviour:
   infoTxt: {fileID: 950958205}
   bar: {fileID: 1907747488}
   timer: 0
-  gameAudio: {fileID: 0}
-  gameSounds: []
 --- !u!1 &1463232566
 GameObject:
   m_ObjectHideFlags: 0
@@ -10676,8 +10673,6 @@ MonoBehaviour:
   infoTxt: {fileID: 56916536}
   bar: {fileID: 546539913}
   timer: 0
-  gameAudio: {fileID: 0}
-  gameSounds: []
 --- !u!65 &1861005357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11917,8 +11912,6 @@ MonoBehaviour:
   infoTxt: {fileID: 653855716}
   bar: {fileID: 1475956460}
   timer: 0
-  gameAudio: {fileID: 0}
-  gameSounds: []
 --- !u!65 &2096766775
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12048,8 +12041,6 @@ MonoBehaviour:
   infoTxt: {fileID: 484604244}
   bar: {fileID: 2118290848}
   timer: 0
-  gameAudio: {fileID: 0}
-  gameSounds: []
 --- !u!65 &2102881246
 BoxCollider:
   m_ObjectHideFlags: 0
