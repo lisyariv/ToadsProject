@@ -33,7 +33,7 @@ public class FrogMovement : MonoBehaviour
     {
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
-        staminaBar.value = 0.01f;
+        staminaBar.value = 0.1f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
