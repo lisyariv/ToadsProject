@@ -6,6 +6,7 @@ using TMPro;
 
 public class FrogMovement : MonoBehaviour
 {
+    public Animator anim;
     public Vector3 moveDirection;
     public Vector3 jumpMovement;
     public Vector3 flyMovement;
@@ -20,6 +21,7 @@ public class FrogMovement : MonoBehaviour
     public bool onGround;
     public bool isFacingRight;
     public bool frogSwitch;
+    public bool isMoving;
 
     public Rigidbody player;
     public Slider staminaBar;
@@ -27,6 +29,7 @@ public class FrogMovement : MonoBehaviour
     public TMP_Text StaminaTxt;
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
+    public int animIndex;
    
     // Start is called before the first frame update
     void Start()
@@ -40,12 +43,13 @@ public class FrogMovement : MonoBehaviour
         onGround = false;
         canSpeed = false;
         frogSwitch = false;
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         //Moving left to right
         if (gameManager.isCollecting == false && gameManager.deadFrog == false && gameManager.isGameFinished == false) 
         {
@@ -56,11 +60,25 @@ public class FrogMovement : MonoBehaviour
 
             moveDirection = new Vector3(x, 0, z);
             transform.Translate(moveDirection * Time.deltaTime * speed);
+            
+            if(x == 0 && z == 0)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            //Animation
+
+            anim.SetBool("isMoving", isMoving);
+            anim.SetInteger("facing", animIndex);
 
            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-               
-                if(frogSwitch == true)
+           {
+                animIndex = 0;
+                if (frogSwitch == true)
                 {
                     frogRenderer.sprite = frogSprites[3];
                 }
@@ -68,11 +86,13 @@ public class FrogMovement : MonoBehaviour
                 {
                     frogRenderer.sprite = frogSprites[0];
                 }
-            }
+                
+           }
+          
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                
+                animIndex = 2;
                 if (frogSwitch == true)
                 {
                     frogRenderer.sprite = frogSprites[5];
@@ -81,24 +101,30 @@ public class FrogMovement : MonoBehaviour
                 {
                     frogRenderer.sprite = frogSprites[2];
                 }
+
+               
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                
+                animIndex = 1;
                 if (frogSwitch == true)
                 {
+                    
                     frogRenderer.sprite = frogSprites[4];
                 }
                 else
                 {
+                    anim.Play("IdleLeft");
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = false;
+               
             }
             if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-
+                animIndex = 1;
                 if (frogSwitch == true)
                 {
                     frogRenderer.sprite = frogSprites[4];
@@ -108,6 +134,7 @@ public class FrogMovement : MonoBehaviour
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = true;
+               
             }
 
             //Jumping 
@@ -115,6 +142,7 @@ public class FrogMovement : MonoBehaviour
             {
                 canJump = false;
                 GetComponent<Rigidbody>().AddForce(jumpMovement);
+               
             }
 
             //Flying
@@ -122,6 +150,7 @@ public class FrogMovement : MonoBehaviour
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
                 staminaBar.value -= 0.01f;
+               
             }
 
             //Speeding
@@ -141,12 +170,13 @@ public class FrogMovement : MonoBehaviour
                 speed = 5f;
                 frogSwitch = false;
             }
+
         }
-       else if(onGround == false && gameManager.isCollecting == true)
+        else if(onGround == false && gameManager.isCollecting == true)
         {
             player.isKinematic = true;
         }
-       
+
        
         //Adding to Stamina Bar
         if(gameManager.preyCount >= 1 && gameManager.isCollected == true)

@@ -50,6 +50,10 @@ public class EnemyDetectionScript : MonoBehaviour
                     attackTimer = 0;
                 }
             }
+            if(frog.staminaBar.value <= 0f)
+            {
+                gameManager.diedFromPred = true;
+            }
         }
     }
     void OnTriggerExit(Collider other)

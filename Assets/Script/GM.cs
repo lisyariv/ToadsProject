@@ -14,6 +14,7 @@ public class GM : MonoBehaviour
     public bool inShelter;
     public bool deadFrog;
     public bool isGameFinished;
+    public bool diedFromPred;
 
     public float WorldTime;
     public int preyCount;
@@ -26,6 +27,7 @@ public class GM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        diedFromPred = false;
         isGameFinished = false;
         isCollected = false;
         isCollecting = false;
@@ -49,7 +51,7 @@ public class GM : MonoBehaviour
     void TimeInGame()
     {
        
-        if (isFlyCollected == true && deadFrog == false)
+        if (isFlyCollected == true && deadFrog == false && isGameFinished == false)
         {
             GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air.";
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly.";
@@ -60,14 +62,19 @@ public class GM : MonoBehaviour
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly, E to speed up.";
         }
 
-        if (frog.staminaBar.value <= 0f && preyCount >= 1)
+        if (frog.staminaBar.value <= 0f && preyCount >= 1 && isGameFinished == false && diedFromPred == true)
         {
             deadFrog = true;
             GameText.text = "You became the predator's next meal. Try again?";
             isGameFinished = true;
         }
+        if (diedFromPred == false && isGameFinished == false && preyCount >= 1 && frog.staminaBar.value <= 0f)
+        {
+            GameText.text = "You passed out from a lack of stamina. Try again?";
+            isGameFinished = true;
+        }
 
-        if (preyCount >= 5 && deadFrog == false)
+        if (preyCount >= 5 && deadFrog == false && isGameFinished == false)
         {
             GameText.text = "Now, interact with the predators to see if you'll obtain an ability. But, be careful!";
         }
@@ -77,12 +84,12 @@ public class GM : MonoBehaviour
             frog.staminaBar.value -= 0.1f;
         }
 
-        if(frog.canSpeed == true && deadFrog == false)
+        if(frog.canSpeed == true && deadFrog == false && isGameFinished == false)
         {
             GameText.text = "You can speed up now by pressing E and a walking button simultaneously.";
         }
 
-        if (WorldTime >= 100f && WorldTime <= 150f)
+        if (WorldTime >= 100f && WorldTime <= 150f && isGameFinished == false)
         {
             isNightTime = true;
             GameText.text = "It is night time. Find shelter!";
@@ -94,7 +101,7 @@ public class GM : MonoBehaviour
             }
         }
 
-        if(WorldTime >= 150f && inShelter == false)
+        if(WorldTime >= 150f && inShelter == false && isGameFinished == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
             isGameFinished = true;
