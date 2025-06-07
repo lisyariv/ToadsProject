@@ -15,6 +15,7 @@ public class GM : MonoBehaviour
     public bool deadFrog;
     public bool isGameFinished;
     public bool diedFromPred;
+    public bool canFollowTarget;
 
     public float WorldTime;
     public int preyCount;

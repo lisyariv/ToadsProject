@@ -22,6 +22,7 @@ public class FrogMovement : MonoBehaviour
     public bool isFacingRight;
     public bool frogSwitch;
     public bool isMoving;
+    public bool isFlying;
 
     public Rigidbody player;
     public Slider staminaBar;
@@ -30,7 +31,7 @@ public class FrogMovement : MonoBehaviour
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
     public int animIndex;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,7 @@ public class FrogMovement : MonoBehaviour
         onGround = false;
         canSpeed = false;
         frogSwitch = false;
+        isFlying = false;
         anim = GetComponent<Animator>();
     }
 
@@ -51,7 +53,7 @@ public class FrogMovement : MonoBehaviour
     {
 
         //Moving left to right
-        if (gameManager.isCollecting == false && gameManager.deadFrog == false && gameManager.isGameFinished == false) 
+        if (gameManager.deadFrog == false && gameManager.isGameFinished == false) 
         {
             player.isKinematic = false;
 
@@ -150,7 +152,7 @@ public class FrogMovement : MonoBehaviour
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
                 staminaBar.value -= 0.01f;
-               
+                isFlying = true;
             }
 
             //Speeding
@@ -214,6 +216,7 @@ public class FrogMovement : MonoBehaviour
             canJump = true;
             canFly = true;
             onGround = true;
+            gameManager.canFollowTarget = true;
         }
         if(collision.gameObject.tag == "Shelter")
         {
