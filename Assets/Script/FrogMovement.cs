@@ -204,9 +204,9 @@ public class FrogMovement : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Bush")
+        if(other.gameObject.tag == "Bush")
         {
-            gameManager.isInBush = false;
+            StartCoroutine(BushWait());
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -227,5 +227,11 @@ public class FrogMovement : MonoBehaviour
         {
             canSpeed = true;
         }
+    }
+
+    IEnumerator BushWait()
+    {
+        yield return new WaitForSeconds(5f);
+        gameManager.isInBush = false;
     }
 }

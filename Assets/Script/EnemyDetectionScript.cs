@@ -81,7 +81,7 @@ public class EnemyDetectionScript : MonoBehaviour
             }
             if (gameManager.isInBush == false)
             {
-                gameManager.canFollowTarget = true;
+                TargetSeen = true;
                 status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
 
                 attackTimer += Time.deltaTime;
@@ -104,6 +104,14 @@ public class EnemyDetectionScript : MonoBehaviour
         {
             status.text = "";
             attackTimer = 0;
+
+            if(gameManager.isInBush == true)
+            {
+                TargetSeen = false;
+                NM.Track();
+            }
+            leftPatrolX = transform.position.x - 10;
+            rightPatrolX = transform.position.x + 10;
         }
     }
    

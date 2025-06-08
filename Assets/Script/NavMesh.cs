@@ -8,23 +8,23 @@ public class NavMesh : MonoBehaviour
     public NavMeshAgent Nav;
     public EnemyDetectionScript eDS;
     public Transform player;
-    public Transform Enemy;
+    public Transform enemy;
+    public Vector3 firstpos;
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     public void Track()
     {
-        if (!eDS.TargetSeen)
+        if (eDS.TargetSeen)
         {
-            Nav.SetDestination(Enemy.position);
+            Nav.SetDestination(player.position);
         }
         else
         {
-            Nav.SetDestination(player.position);
+            Nav.SetDestination(firstpos);
         }
        
     }
