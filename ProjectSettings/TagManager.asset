@@ -11,6 +11,8 @@ TagManager:
   - Bush
   - Shelter
   - Predator
+  - Stick
+  - Leaf
   layers:
   - Default
   - TransparentFX

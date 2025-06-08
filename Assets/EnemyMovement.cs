@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     //[SerializeField] private Animator anim;
     [SerializeField] private float speed;
-    [SerializeField] private float leftPatrolX, rightPatrolX;
+    [SerializeField] public float leftPatrolX, rightPatrolX;
     [SerializeField] private float minPauseTime, maxPauseTime;
     [SerializeField] private float minWalkTime, maxWalkTime;
     [SerializeField] private int facingDirection = -1;

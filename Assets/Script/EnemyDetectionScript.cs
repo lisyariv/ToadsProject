@@ -14,16 +14,8 @@ public class EnemyDetectionScript : MonoBehaviour
     public GM gameManager;
     public FrogMovement frog;
     public float hp;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private float speed;
-    [SerializeField] private float leftPatrolX, rightPatrolX;
-    [SerializeField] private float minPauseTime, maxPauseTime;
-    [SerializeField] private float minWalkTime, maxWalkTime;
-    [SerializeField] private int facingDirection = -1;
-
-    private float randomTime, timer;
-    private bool isWalking = true;
-    private bool isFlipping;
+    public EnemyMovement EM;
+   
     public bool TargetSeen;
     // Start is called before the first frame update
     void Start()
@@ -33,32 +25,17 @@ public class EnemyDetectionScript : MonoBehaviour
         status.text = "";
         hp = frog.staminaBar.value;
         gameManager = GameObject.Find("GameManager").GetComponent<GM>();
-        randomTime = Random.Range(minWalkTime, maxWalkTime);
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        leftPatrolX = transform.position.x - 10;
-        rightPatrolX = transform.position.x + 10;
         TargetSeen = false;
         gameManager.canFollowTarget = false;
+        EM.leftPatrolX = transform.position.x - 10;
+        EM.rightPatrolX = transform.position.x + 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if(timer >= randomTime)
-        {
-            StateChange();
-        }
-        if(!isFlipping && (transform.position.x > rightPatrolX || transform.position.x < leftPatrolX))
-        {
-            StartCoroutine(Flip());
-        }
-        if (isWalking)
-        {
-            rb.velocity = Vector2.right * facingDirection * speed;
-        }
-
+        
         if (TargetSeen && !gameManager.isInBush)
         {
             NM.Track();
@@ -72,8 +49,8 @@ public class EnemyDetectionScript : MonoBehaviour
             
             if (gameManager.isInBush == true)
             {
-                leftPatrolX = transform.position.x - 10;
-                rightPatrolX = transform.position.x + 10;
+                EM.leftPatrolX = transform.position.x - 10;
+                EM.rightPatrolX = transform.position.x + 10;
                 status.text = "";
                 attackTimer = 0;
                 TargetSeen = false;
@@ -110,24 +87,8 @@ public class EnemyDetectionScript : MonoBehaviour
                 TargetSeen = false;
                 NM.Track();
             }
-            leftPatrolX = transform.position.x - 10;
-            rightPatrolX = transform.position.x + 10;
+            EM.leftPatrolX = transform.position.x - 10;
+            EM.rightPatrolX = transform.position.x + 10;
         }
-    }
-   
-    IEnumerator Flip()
-    {
-        isFlipping = true;
-        transform.Rotate(0, 180, 0);
-        facingDirection *= -1;
-        yield return new WaitForSeconds(0.5f);
-        isFlipping = false;
-    }
-
-    void StateChange()
-    {
-        isWalking = !isWalking;
-        randomTime = isWalking ? Random.Range(minWalkTime, maxWalkTime) : Random.Range(minPauseTime, maxPauseTime);
-        timer = 0;
     }
 }
