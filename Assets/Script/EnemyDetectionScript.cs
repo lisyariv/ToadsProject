@@ -7,6 +7,7 @@ using TMPro;
 public class EnemyDetectionScript : MonoBehaviour
 {
     public Transform target;
+    public NavMesh NM;
     public TMP_Text status;
     public float attackTimer;
     public IEnumerator attack;
@@ -58,19 +59,12 @@ public class EnemyDetectionScript : MonoBehaviour
             rb.velocity = Vector2.right * facingDirection * speed;
         }
 
-        /*if (TargetSeen && !gameManager.isInBush)
+        if (TargetSeen && !gameManager.isInBush)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }*/
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            TargetSeen = true;
+            NM.Track();
         }
-
     }
+    
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -83,15 +77,17 @@ public class EnemyDetectionScript : MonoBehaviour
                 status.text = "";
                 attackTimer = 0;
                 TargetSeen = false;
+                gameManager.canFollowTarget = false;
             }
             if (gameManager.isInBush == false)
             {
+                gameManager.canFollowTarget = true;
                 status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
 
                 attackTimer += Time.deltaTime;
                 if (attackTimer >= 2f)
                 {
-                    frog.staminaBar.value -= 1;
+                    frog.staminaBar.value -= 0.5f;
                     Debug.Log(frog.staminaBar.value);
                     attackTimer = 0;
                 }
