@@ -24,12 +24,7 @@ public class GM : MonoBehaviour
     public TMP_Text KeysText;
 
     public FrogMovement frog;
-    public AudioSource backgroundAudio;
-    public AudioClip backgroundSound;
-
-    
-
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -44,9 +39,6 @@ public class GM : MonoBehaviour
         isNightTime = false;
         GameText.text = "Your energy is low! Find and consume prey to boost your energy.";
         KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump.";
-        backgroundAudio.clip = backgroundSound;
-        backgroundAudio.Play();
-
 
     }
 
