@@ -19,9 +19,11 @@ public class GM : MonoBehaviour
 
     public float WorldTime;
     public int preyCount;
+    public int matCount;
 
     public TMP_Text GameText;
     public TMP_Text KeysText;
+    public TMP_Text TaskText;
 
     public FrogMovement frog;
    
@@ -37,8 +39,9 @@ public class GM : MonoBehaviour
         preyCount = 0;
         isFlyCollected = false;
         isNightTime = false;
-        GameText.text = "Your energy is low! Find and consume prey to boost your energy.";
+        GameText.text = "Your energy is low! Find and consume prey to replenish your energy. Collect at least 5.";
         KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump.";
+        TaskText.text = "Prey Collected: " + preyCount;
 
     }
 
@@ -54,7 +57,8 @@ public class GM : MonoBehaviour
        
         if (isFlyCollected == true && deadFrog == false && isGameFinished == false)
         {
-            GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air.";
+            TaskText.text = "Prey Collected: " + preyCount;
+            GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air, but not too much as it will decrease your stamina.";
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly.";
         }
 
@@ -77,7 +81,8 @@ public class GM : MonoBehaviour
 
         if (preyCount >= 5 && deadFrog == false && isGameFinished == false)
         {
-            GameText.text = "Now, interact with the predators to see if you'll obtain an ability. But, be careful!";
+            GameText.text = "Now, collect items to build a shelter. Also, interact with the predators, but be careful!";
+            TaskText.text = "Material Collected: " + matCount + "/8";
         }
 
         if(frog.staminaBar.value == 1.1f)
@@ -87,13 +92,14 @@ public class GM : MonoBehaviour
 
         if(frog.canSpeed == true && deadFrog == false && isGameFinished == false)
         {
-            GameText.text = "You can speed up now by pressing E and a walking button simultaneously.";
+            GameText.text = "You can speed up now by pressing E and a walking button simultaneously. This will also drain your stamina.";
         }
 
-        if (WorldTime >= 100f && WorldTime <= 150f && isGameFinished == false)
+        if (WorldTime >= 130f && WorldTime <= 180f && isGameFinished == false)
         {
             isNightTime = true;
-            GameText.text = "It is night time. Find shelter!";
+            GameText.text = "It is night time. Create your shelter in a safe area!";
+            TaskText.text = "Find a safe area and construct your shelter.";
 
             if (inShelter == true)
             {
@@ -102,7 +108,7 @@ public class GM : MonoBehaviour
             }
         }
 
-        if(WorldTime >= 150f && inShelter == false && isGameFinished == false)
+        if(WorldTime >= 180f && inShelter == false && isGameFinished == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
             isGameFinished = true;

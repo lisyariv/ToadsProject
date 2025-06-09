@@ -13,6 +13,7 @@ TagManager:
   - Predator
   - Stick
   - Leaf
+  - Material
   layers:
   - Default
   - TransparentFX

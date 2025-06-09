@@ -13,7 +13,7 @@ public class FrogMovement : MonoBehaviour
 
     public float speed = 5.0f;
     public float timer;
-    //public float timer1;
+    public float timer1;
 
     public bool canJump;
     public bool canFly;
@@ -23,9 +23,11 @@ public class FrogMovement : MonoBehaviour
     public bool frogSwitch;
     public bool isMoving;
     public bool isFlying;
+    public bool shelterCreated;
 
     public Rigidbody player;
     public Slider staminaBar;
+    public Slider buildingBar;
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public List<Sprite> frogSprites;
@@ -37,6 +39,8 @@ public class FrogMovement : MonoBehaviour
     {
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
+        buildingBar.maxValue = 3f;
+        buildingBar.value = 0f;
         staminaBar.value = 0.1f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
@@ -45,6 +49,7 @@ public class FrogMovement : MonoBehaviour
         canSpeed = false;
         frogSwitch = false;
         isFlying = false;
+        shelterCreated = false;
         anim = GetComponent<Animator>();
     }
 
@@ -173,6 +178,11 @@ public class FrogMovement : MonoBehaviour
                 frogSwitch = false;
             }
 
+            if(gameManager.inShelter == true && Input.GetKey(KeyCode.R) && shelterCreated == false)
+            {
+                BuildShelter();
+            }
+
         }
         else if(onGround == false && gameManager.isCollecting == true)
         {
@@ -194,6 +204,11 @@ public class FrogMovement : MonoBehaviour
         {
             gameManager.isInBush = true;
         }
+        if (other.gameObject.tag == "Shelter" && shelterCreated == false)
+        {
+            gameManager.GameText.text = "You can build your shelter here.";
+            gameManager.inShelter = true;
+        }
     }
     void OnTriggerStay(Collider other)
     {
@@ -201,12 +216,25 @@ public class FrogMovement : MonoBehaviour
         {
             gameManager.isInBush = true;
         }
+        if (other.gameObject.tag == "Shelter")
+        {
+            gameManager.GameText.text = "You can build your shelter here.";
+            
+        }
+        if(other.gameObject.tag == "ShelterUsed")
+        {
+            gameManager.inShelter = true;
+        }
     }
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Bush")
         {
             StartCoroutine(BushWait());
+        }
+        if (other.gameObject.tag == "Shelter")
+        {
+            gameManager.inShelter = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -218,14 +246,15 @@ public class FrogMovement : MonoBehaviour
             onGround = true;
             gameManager.canFollowTarget = true;
         }
-        if(collision.gameObject.tag == "Shelter")
-        {
-            gameManager.inShelter = true;
-        }
-
+        
         if (collision.gameObject.tag == "Predator")
         {
             canSpeed = true;
+        }
+        if(collision.gameObject.tag == "Material")
+        {
+            Destroy(collision.gameObject);
+            gameManager.matCount += 1;
         }
     }
 
@@ -233,5 +262,13 @@ public class FrogMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         gameManager.isInBush = false;
+    }
+
+    void BuildShelter()
+    {
+        timer1 += Time.deltaTime;
+        buildingBar.value = timer1;
+        gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
+        gameObject.tag = "ShelterUsed";
     }
 }
