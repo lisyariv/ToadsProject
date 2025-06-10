@@ -7,6 +7,7 @@ using TMPro;
 public class FrogMovement : MonoBehaviour
 {
     public Animator anim;
+
     public Vector3 moveDirection;
     public Vector3 jumpMovement;
     public Vector3 flyMovement;
@@ -26,8 +27,10 @@ public class FrogMovement : MonoBehaviour
     public bool shelterCreated;
 
     public Rigidbody player;
+
     public Slider staminaBar;
     public Slider buildingBar;
+
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public List<Sprite> frogSprites;
@@ -37,6 +40,8 @@ public class FrogMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindWithTag("Shelter").SetActive(false);
+        buildingBar.gameObject.SetActive(false);
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
         buildingBar.maxValue = 3f;
@@ -266,9 +271,11 @@ public class FrogMovement : MonoBehaviour
 
     void BuildShelter()
     {
+        buildingBar.gameObject.SetActive(true);
         timer1 += Time.deltaTime;
         buildingBar.value = timer1;
         gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
         gameObject.tag = "ShelterUsed";
+        Destroy(GameObject.FindWithTag("Shelter"));
     }
 }

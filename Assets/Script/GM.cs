@@ -101,6 +101,10 @@ public class GM : MonoBehaviour
             GameText.text = "It is night time. Create your shelter in a safe area!";
             TaskText.text = "Find a safe area and construct your shelter.";
 
+            if(matCount >= 8)
+            {
+                GameObject.FindWithTag("Shelter").SetActive(true);
+            }
             if (inShelter == true)
             {
                 GameText.text = "You found shelter and were able to complete the first day!";
