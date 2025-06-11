@@ -116,7 +116,6 @@ public class GM : MonoBehaviour
                 {
                     shelters[i].SetActive(true);
                 }
-                //GameObject.Find("Shelter").SetActive(true);
             }
             if (inShelter == true)
             {

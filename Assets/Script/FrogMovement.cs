@@ -277,6 +277,7 @@ public class FrogMovement : MonoBehaviour
         buildingBar.value = timer1;
         gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
         gameObject.tag = "ShelterUsed";
-        Destroy(GameObject.FindWithTag("Shelter"));
+
+    
     }
 }
