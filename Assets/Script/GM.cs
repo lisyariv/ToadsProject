@@ -26,10 +26,15 @@ public class GM : MonoBehaviour
     public TMP_Text TaskText;
 
     public FrogMovement frog;
+
+    public List<GameObject> shelters;
    
     // Start is called before the first frame update
     void Start()
     {
+
+        GameObject[] objectsShelters = GameObject.FindGameObjectsWithTag("Shelter");
+        shelters = new List<GameObject>(objectsShelters);
         diedFromPred = false;
         isGameFinished = false;
         isCollected = false;
@@ -43,6 +48,10 @@ public class GM : MonoBehaviour
         KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump.";
         TaskText.text = "Prey Collected: " + preyCount;
 
+        for (int i = 0; i < shelters.Count; i++)
+        {
+            shelters[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -103,7 +112,11 @@ public class GM : MonoBehaviour
 
             if(matCount >= 8)
             {
-                GameObject.FindWithTag("Shelter").SetActive(true);
+                for (int i = 0; i < shelters.Count; i++)
+                {
+                    shelters[i].SetActive(true);
+                }
+                //GameObject.Find("Shelter").SetActive(true);
             }
             if (inShelter == true)
             {

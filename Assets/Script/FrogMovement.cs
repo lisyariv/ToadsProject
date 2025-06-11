@@ -40,7 +40,6 @@ public class FrogMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindWithTag("Shelter").SetActive(false);
         buildingBar.gameObject.SetActive(false);
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
@@ -56,6 +55,8 @@ public class FrogMovement : MonoBehaviour
         isFlying = false;
         shelterCreated = false;
         anim = GetComponent<Animator>();
+
+        
     }
 
     // Update is called once per frame
