@@ -14,6 +14,7 @@ TagManager:
   - Stick
   - Leaf
   - Material
+  - ShelterUsed
   layers:
   - Default
   - TransparentFX

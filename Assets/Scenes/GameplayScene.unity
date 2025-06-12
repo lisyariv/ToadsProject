@@ -824,6 +824,7 @@ MonoBehaviour:
   isMoving: 0
   isFlying: 0
   shelterCreated: 0
+  shelterCreating: 0
   player: {fileID: 164247971}
   staminaBar: {fileID: 1212046789}
   buildingBar: {fileID: 712815485}
@@ -4889,13 +4890,15 @@ MonoBehaviour:
   isGameFinished: 0
   diedFromPred: 0
   canFollowTarget: 0
+  foundShelter: 0
   WorldTime: 0
-  preyCount: 0
-  matCount: 0
+  preyCount: 5
+  matCount: 8
   GameText: {fileID: 1086186745}
   KeysText: {fileID: 793382871}
   TaskText: {fileID: 1981504559}
   frog: {fileID: 164247972}
+  shelters: []
 --- !u!4 &1443012110
 Transform:
   m_ObjectHideFlags: 0

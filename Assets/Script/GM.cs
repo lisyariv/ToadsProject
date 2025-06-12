@@ -16,6 +16,7 @@ public class GM : MonoBehaviour
     public bool isGameFinished;
     public bool diedFromPred;
     public bool canFollowTarget;
+    public bool foundShelter;
 
     public float WorldTime;
     public int preyCount;
@@ -37,6 +38,7 @@ public class GM : MonoBehaviour
         shelters = new List<GameObject>(objectsShelters);
         diedFromPred = false;
         isGameFinished = false;
+        foundShelter = false;
         isCollected = false;
         isCollecting = false;
         isInBush = false;
@@ -64,7 +66,7 @@ public class GM : MonoBehaviour
     void TimeInGame()
     {
        
-        if (isFlyCollected == true && deadFrog == false && isGameFinished == false)
+        if (!foundShelter && isFlyCollected == true && deadFrog == false && isGameFinished == false)
         {
             TaskText.text = "Prey Collected: " + preyCount;
             GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air, but not too much as it will decrease your stamina.";
@@ -88,10 +90,18 @@ public class GM : MonoBehaviour
             isGameFinished = true;
         }
 
-        if (preyCount >= 5 && deadFrog == false && isGameFinished == false)
+        if (!isNightTime && !foundShelter && !frog.shelterCreated && preyCount >= 5 && deadFrog == false && isGameFinished == false)
         {
             GameText.text = "Now, collect items to build a shelter. Also, interact with the predators, but be careful!";
             TaskText.text = "Material Collected: " + matCount + "/8";
+
+            if (matCount >= 8)
+            {
+                for (int i = 0; i < shelters.Count; i++)
+                {
+                    shelters[i].SetActive(true);
+                }
+            }
         }
 
         if(frog.staminaBar.value == 1.1f)
@@ -99,7 +109,7 @@ public class GM : MonoBehaviour
             frog.staminaBar.value -= 0.1f;
         }
 
-        if(frog.canSpeed == true && deadFrog == false && isGameFinished == false)
+        if(!isNightTime && !foundShelter && frog.canSpeed == true && deadFrog == false && isGameFinished == false)
         {
             GameText.text = "You can speed up now by pressing E and a walking button simultaneously. This will also drain your stamina.";
         }
@@ -107,17 +117,23 @@ public class GM : MonoBehaviour
         if (WorldTime >= 130f && WorldTime <= 180f && isGameFinished == false)
         {
             isNightTime = true;
-            GameText.text = "It is night time. Create your shelter in a safe area!";
-            TaskText.text = "Find a safe area and construct your shelter.";
 
-            if(matCount >= 8)
+            if(foundShelter == false && frog.shelterCreated == false)
             {
-                for (int i = 0; i < shelters.Count; i++)
-                {
-                    shelters[i].SetActive(true);
-                }
+                GameText.text = "It is night time. Create your shelter in a safe area!";
             }
-            if (inShelter == true)
+
+            if(foundShelter && frog.shelterCreated)
+            {
+                GameText.text = "It is night time. Go to your shelter!";
+            }
+            
+            if(matCount == 8)
+            {
+                TaskText.text = "Find a safe area and construct your shelter.";
+            }
+
+            if(inShelter == true)
             {
                 GameText.text = "You found shelter and were able to complete the first day!";
                 isGameFinished = true;

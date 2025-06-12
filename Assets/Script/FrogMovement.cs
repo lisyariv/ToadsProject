@@ -25,6 +25,7 @@ public class FrogMovement : MonoBehaviour
     public bool isMoving;
     public bool isFlying;
     public bool shelterCreated;
+    public bool shelterCreating;
 
     public Rigidbody player;
 
@@ -54,6 +55,7 @@ public class FrogMovement : MonoBehaviour
         frogSwitch = false;
         isFlying = false;
         shelterCreated = false;
+        shelterCreating = false;
         anim = GetComponent<Animator>();
 
         
@@ -184,9 +186,9 @@ public class FrogMovement : MonoBehaviour
                 frogSwitch = false;
             }
 
-            if(gameManager.inShelter == true && Input.GetKey(KeyCode.R) && shelterCreated == false)
+            if(gameManager.foundShelter == true && shelterCreated == false)
             {
-                BuildShelter();
+                    BuildShelter();
             }
 
         }
@@ -213,7 +215,6 @@ public class FrogMovement : MonoBehaviour
         if (other.gameObject.tag == "Shelter" && shelterCreated == false)
         {
             gameManager.GameText.text = "You can build your shelter here.";
-            gameManager.inShelter = true;
         }
     }
     void OnTriggerStay(Collider other)
@@ -224,13 +225,17 @@ public class FrogMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Shelter")
         {
-            gameManager.GameText.text = "You can build your shelter here.";
-            
+            if(!shelterCreated)
+            {
+                gameManager.GameText.text = "You can build your shelter here. Press R to create your shelter.";
+                gameManager.foundShelter = true;
+            }
+            if (shelterCreated)
+            {
+                gameManager.inShelter = true;
+            }
         }
-        if(other.gameObject.tag == "ShelterUsed")
-        {
-            gameManager.inShelter = true;
-        }
+        
     }
     void OnTriggerExit(Collider other)
     {
@@ -272,12 +277,24 @@ public class FrogMovement : MonoBehaviour
 
     void BuildShelter()
     {
-        buildingBar.gameObject.SetActive(true);
-        timer1 += Time.deltaTime;
-        buildingBar.value = timer1;
-        gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
-        gameObject.tag = "ShelterUsed";
-
-    
+        if (Input.GetKey(KeyCode.R))
+        {
+            shelterCreating = true;
+        }
+        if (shelterCreating)
+        {
+            buildingBar.gameObject.SetActive(true);
+            timer1 += Time.deltaTime;
+            buildingBar.value = timer1;
+            Debug.Log(timer1);
+        }
+        if(buildingBar.value >= 2f)
+        {
+            shelterCreating = false;
+            shelterCreated = true;
+            buildingBar.gameObject.SetActive(false);
+            gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
+        }
+       
     }
 }
