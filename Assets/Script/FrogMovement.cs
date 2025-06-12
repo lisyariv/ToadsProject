@@ -26,6 +26,7 @@ public class FrogMovement : MonoBehaviour
     public bool isFlying;
     public bool shelterCreated;
     public bool shelterCreating;
+    public bool isSnake;
 
     public Rigidbody player;
 
@@ -89,16 +90,19 @@ public class FrogMovement : MonoBehaviour
 
             anim.SetBool("isMoving", isMoving);
             anim.SetInteger("facing", animIndex);
+            anim.SetBool("isSnake", isSnake);
 
            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
            {
                 animIndex = 0;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[3];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[0];
                 }
                 
@@ -110,10 +114,12 @@ public class FrogMovement : MonoBehaviour
                 animIndex = 2;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[5];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[2];
                 }
 
@@ -126,12 +132,12 @@ public class FrogMovement : MonoBehaviour
                 animIndex = 1;
                 if (frogSwitch == true)
                 {
-                    
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[4];
                 }
                 else
                 {
-                    anim.Play("IdleLeft");
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = false;
@@ -142,10 +148,12 @@ public class FrogMovement : MonoBehaviour
                 animIndex = 1;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[4];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = true;
