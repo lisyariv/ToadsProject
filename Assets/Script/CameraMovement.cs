@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    //public SettingsScript sens;
     public Transform player;
     public float mouseSensitivity;
     public float xRot = 0f;
@@ -14,15 +13,6 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(SettingsScript.sensitivity == 0)
-        {
-            mouseSensitivity = 250;
-        }
-        else
-        {
-            mouseSensitivity = SettingsScript.sensitivity * 10;
-        }
-        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
     }
 
