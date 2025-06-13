@@ -6,13 +6,15 @@ using TMPro;
 
 public class FrogMovement : MonoBehaviour
 {
+    public Animator anim;
+
     public Vector3 moveDirection;
     public Vector3 jumpMovement;
     public Vector3 flyMovement;
 
     public float speed = 5.0f;
     public float timer;
-    //public float timer1;
+    public float timer1;
 
     public bool canJump;
     public bool canFly;
@@ -20,19 +22,31 @@ public class FrogMovement : MonoBehaviour
     public bool onGround;
     public bool isFacingRight;
     public bool frogSwitch;
+    public bool isMoving;
+    public bool isFlying;
+    public bool shelterCreated;
+    public bool shelterCreating;
+    public bool isSnake;
 
     public Rigidbody player;
+
     public Slider staminaBar;
+    public Slider buildingBar;
+
     public GM gameManager;
     public TMP_Text StaminaTxt;
     public List<Sprite> frogSprites;
     public SpriteRenderer frogRenderer;
-   
+    public int animIndex;
+
     // Start is called before the first frame update
     void Start()
     {
+        buildingBar.gameObject.SetActive(false);
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
+        buildingBar.maxValue = 3f;
+        buildingBar.value = 0f;
         staminaBar.value = 0.1f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
@@ -40,14 +54,20 @@ public class FrogMovement : MonoBehaviour
         onGround = false;
         canSpeed = false;
         frogSwitch = false;
+        isFlying = false;
+        shelterCreated = false;
+        shelterCreating = false;
+        anim = GetComponent<Animator>();
+
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         //Moving left to right
-        if (gameManager.isCollecting == false && gameManager.deadFrog == false && gameManager.isGameFinished == false) 
+        if (gameManager.deadFrog == false && gameManager.isGameFinished == false) 
         {
             player.isKinematic = false;
 
@@ -56,58 +76,88 @@ public class FrogMovement : MonoBehaviour
 
             moveDirection = new Vector3(x, 0, z);
             transform.Translate(moveDirection * Time.deltaTime * speed);
+            
+            if(x == 0 && z == 0)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            //Animation
+
+            anim.SetBool("isMoving", isMoving);
+            anim.SetInteger("facing", animIndex);
+            anim.SetBool("isSnake", isSnake);
 
            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-               
-                if(frogSwitch == true)
+           {
+                animIndex = 0;
+                if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[3];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[0];
                 }
-            }
+                
+           }
+          
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                
+                animIndex = 2;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[5];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[2];
                 }
+
+               
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                
+                animIndex = 1;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[4];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = false;
+               
             }
             if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-
+                animIndex = 1;
                 if (frogSwitch == true)
                 {
+                    isSnake = true;
                     frogRenderer.sprite = frogSprites[4];
                 }
                 else
                 {
+                    isSnake = false;
                     frogRenderer.sprite = frogSprites[1];
                 }
                 frogRenderer.flipX = true;
+               
             }
 
             //Jumping 
@@ -115,6 +165,7 @@ public class FrogMovement : MonoBehaviour
             {
                 canJump = false;
                 GetComponent<Rigidbody>().AddForce(jumpMovement);
+               
             }
 
             //Flying
@@ -122,6 +173,7 @@ public class FrogMovement : MonoBehaviour
             {
                 GetComponent<Rigidbody>().AddForce(flyMovement);
                 staminaBar.value -= 0.01f;
+                isFlying = true;
             }
 
             //Speeding
@@ -141,12 +193,18 @@ public class FrogMovement : MonoBehaviour
                 speed = 5f;
                 frogSwitch = false;
             }
+
+            if(gameManager.foundShelter == true && shelterCreated == false)
+            {
+                    BuildShelter();
+            }
+
         }
-       else if(onGround == false && gameManager.isCollecting == true)
+        else if(onGround == false && gameManager.isCollecting == true)
         {
             player.isKinematic = true;
         }
-       
+
        
         //Adding to Stamina Bar
         if(gameManager.preyCount >= 1 && gameManager.isCollected == true)
@@ -162,6 +220,10 @@ public class FrogMovement : MonoBehaviour
         {
             gameManager.isInBush = true;
         }
+        if (other.gameObject.tag == "Shelter" && shelterCreated == false)
+        {
+            gameManager.GameText.text = "You can build your shelter here.";
+        }
     }
     void OnTriggerStay(Collider other)
     {
@@ -169,12 +231,29 @@ public class FrogMovement : MonoBehaviour
         {
             gameManager.isInBush = true;
         }
+        if (other.gameObject.tag == "Shelter")
+        {
+            if(!shelterCreated)
+            {
+                gameManager.GameText.text = "You can build your shelter here. Press R to create your shelter.";
+                gameManager.foundShelter = true;
+            }
+            if (shelterCreated)
+            {
+                gameManager.inShelter = true;
+            }
+        }
+        
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Bush")
+        if(other.gameObject.tag == "Bush")
         {
-            gameManager.isInBush = false;
+            StartCoroutine(BushWait());
+        }
+        if (other.gameObject.tag == "Shelter")
+        {
+            gameManager.inShelter = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -184,15 +263,46 @@ public class FrogMovement : MonoBehaviour
             canJump = true;
             canFly = true;
             onGround = true;
+            gameManager.canFollowTarget = true;
         }
-        if(collision.gameObject.tag == "Shelter")
-        {
-            gameManager.inShelter = true;
-        }
-
+        
         if (collision.gameObject.tag == "Predator")
         {
             canSpeed = true;
         }
+        if(collision.gameObject.tag == "Material")
+        {
+            Destroy(collision.gameObject);
+            gameManager.matCount += 1;
+        }
+    }
+
+    IEnumerator BushWait()
+    {
+        yield return new WaitForSeconds(5f);
+        gameManager.isInBush = false;
+    }
+
+    void BuildShelter()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            shelterCreating = true;
+        }
+        if (shelterCreating)
+        {
+            buildingBar.gameObject.SetActive(true);
+            timer1 += Time.deltaTime;
+            buildingBar.value = timer1;
+            Debug.Log(timer1);
+        }
+        if(buildingBar.value >= 2f)
+        {
+            shelterCreating = false;
+            shelterCreated = true;
+            buildingBar.gameObject.SetActive(false);
+            gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
+        }
+       
     }
 }
