@@ -6,16 +6,17 @@ using TMPro;
 
 public class EnemyDetectionScript : MonoBehaviour
 {
+    public Transform target;
+    public NavMesh NM;
     public TMP_Text status;
     public float attackTimer;
     public IEnumerator attack;
     public GM gameManager;
     public FrogMovement frog;
     public float hp;
-    public AudioSource enemyAudio;
-    public AudioClip enemySound;
-
-
+    public EnemyMovement EM;
+   
+    public bool TargetSeen;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,68 +25,71 @@ public class EnemyDetectionScript : MonoBehaviour
         status.text = "";
         hp = frog.staminaBar.value;
         gameManager = GameObject.Find("GameManager").GetComponent<GM>();
-        
-
-
-
-
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        TargetSeen = false;
+        gameManager.canFollowTarget = false;
+        EM.leftPatrolX = transform.position.x - 10;
+        EM.rightPatrolX = transform.position.x + 10;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        
-    }
-    
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
+        if (TargetSeen && !gameManager.isInBush)
         {
-            enemyAudio.clip = enemySound;
-            enemyAudio.Play();
-            gameManager.backgroundAudio.Stop();
-
+            NM.Track();
+            status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
         }
     }
-   void OnTriggerStay(Collider other)
+    
+    void OnTriggerStay(Collider other)
     {
-        
         if (other.gameObject.tag == "Player")
         {
             
-            
             if (gameManager.isInBush == true)
             {
+                EM.leftPatrolX = transform.position.x - 10;
+                EM.rightPatrolX = transform.position.x + 10;
                 status.text = "";
                 attackTimer = 0;
-                
+                TargetSeen = false;
+                gameManager.canFollowTarget = false;
             }
             if (gameManager.isInBush == false)
             {
-                
-                status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
+                TargetSeen = true;
+               
 
                 attackTimer += Time.deltaTime;
                 if (attackTimer >= 2f)
                 {
-                    frog.staminaBar.value -= 1;
+                    frog.staminaBar.value -= 0.5f;
                     Debug.Log(frog.staminaBar.value);
                     attackTimer = 0;
                 }
+            }
+            if(frog.staminaBar.value <= 0f)
+            {
+                gameManager.diedFromPred = true;
             }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        enemyAudio.Stop();
-        gameManager.backgroundAudio.Play();
         if (other.gameObject.tag == "Player")
         {
             status.text = "";
             attackTimer = 0;
+
+            if(gameManager.isInBush == true)
+            {
+                TargetSeen = false;
+                NM.Track();
+            }
+            EM.leftPatrolX = transform.position.x - 10;
+            EM.rightPatrolX = transform.position.x + 10;
         }
     }
-
-    
 }
