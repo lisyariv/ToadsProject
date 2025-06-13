@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
+    
     public bool isCollected;
     public bool isCollecting;
     public bool isInBush;
