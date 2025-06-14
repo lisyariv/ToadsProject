@@ -983,25 +983,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueTxt:
-  - 'Right as he swam out of his egg, Freddie was born into a family of frogs, plentiful
-    and skillful. As the frog grew alongside his siblings into a froglet, they looked
-    at him in utter shock and dispersed from Freddie.  '
+  - Right as he swam out of his egg, Freddie was born into a family of frogs, plentiful
+    and skillful.
+  - 'As the frog grew alongside his siblings into a froglet, they looked at him in
+    utter shock and dispersed from Freddie. '
   - "\u201CWhere are my siblings? Are they hiding from me?\u201D said Freddie. "
   - "Confused and alone, he walked to his parents\u2019 home, and he asked \u201CHave
     my siblings been sent on a task without me? I couldn\u2019t find them at all
     today.\u201D"
   - 'As soon as his mouth opened, disgust and shame were painted onto the faces of
-    his parents. His father suddenly grabs hold of Freddie, shushing him until a
-    silence falls upon their shelter. '
-  - "Then he mutters \u201CThe likes of you would never be respected, not in our
+    his parents. His father suddenly grabs a hold of Freddie, shushing him until
+    a silence falls upon their shelter. '
+  - "Then he mutters, \u201CThe likes of you would never be respected, not in our
     family, nor in the public eye. You disgrace your mother and I\u2019s reputation
-    and we won\u2019t tolerate such a fool for a son. Get away from us and fiend
-    for yourself in the forest. You are no longer welcomed here.\u201D"
+    and we won\u2019t tolerate such a fool for a son. Get away from us and fend for
+    yourself in the forest. You are no longer welcome here.\u201D"
   - "His mother wishes him good luck in the wilderness and turns her back away from
     him, with a hint of disapproval of what she\u2019s birthed.  "
-  - Abandoned and alone, Freddie was forced to start his life anew. As he searched
-    for prey in the water, the chomp of his mouth underwater formed a water bubble,
-    and reflected onto it was his mouth without a tongue.
+  - 'Abandoned and alone, Freddie was forced to start his life anew. '
+  - As he searched for prey in the water, the chomp of his mouth underwater formed
+    a water bubble, and reflected onto it was his mouth without a tongue.
   - "Now he understood his family\u2019s peculiar reaction. Because he was deficient
     of a tongue, he was seen as gross and odd."
   - 'Continuing the swim through the lake, his eyes come in contact with a glowing
@@ -1029,9 +1030,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ee4ea3c598e7e445e9e993dbb314abf6, type: 3}
   - {fileID: 21300000, guid: f264180682fc8471caa2d636c83af5db, type: 3}
   - {fileID: 21300000, guid: 2ac88535518cc42c598fcfdc9464fd4d, type: 3}
-  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
   - {fileID: 21300000, guid: 61cd66fc17a524f6eb99ab9aeef8bfa0, type: 3}
   - {fileID: 21300000, guid: 42d80f61537c048a6a71ca72e5b84cfa, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
   currentImage: {fileID: 763146127}
   Dialogue: {fileID: 1583012918}
   index: 0

@@ -35,7 +35,6 @@ public class EnemyDetectionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (TargetSeen && !gameManager.isInBush)
         {
             NM.Track();
