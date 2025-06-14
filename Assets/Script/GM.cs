@@ -31,7 +31,7 @@ public class GM : MonoBehaviour
     public FrogMovement frog;
 
     public List<GameObject> shelters;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +73,7 @@ public class GM : MonoBehaviour
             TaskText.text = "Prey Collected: " + preyCount;
             GameText.text = "Now, you're able to fly! Use the F key repeatedly to fly in the air, but not too much as it will decrease your stamina.";
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly.";
+
         }
 
         if(frog.canSpeed == true)
@@ -85,11 +86,14 @@ public class GM : MonoBehaviour
             deadFrog = true;
             GameText.text = "You became the predator's next meal. Try again?";
             isGameFinished = true;
+            SceneManager.LoadScene("LoseScene");
+
         }
         if (diedFromPred == false && isGameFinished == false && preyCount >= 1 && frog.staminaBar.value <= 0f)
         {
             GameText.text = "You passed out from a lack of stamina. Try again?";
             isGameFinished = true;
+            SceneManager.LoadScene("LoseScene");
         }
 
         if (!isNightTime && !foundShelter && !frog.shelterCreated && preyCount >= 5 && deadFrog == false && isGameFinished == false)
@@ -135,17 +139,20 @@ public class GM : MonoBehaviour
                 TaskText.text = "Find a safe area and construct your shelter.";
             }
 
-            if(inShelter == true)
+            if (inShelter == true)
             {
                 GameText.text = "You found shelter and were able to complete the first day!";
                 isGameFinished = true;
+                SceneManager.LoadScene("WinScreen");
             }
+
         }
 
-        if(WorldTime >= 180f && inShelter == false && isGameFinished == false)
+        if (WorldTime >= 180f && inShelter == false && isGameFinished == false)
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
             isGameFinished = true;
+
         }
     }
 }
