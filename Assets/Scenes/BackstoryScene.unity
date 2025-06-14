@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -285,6 +285,82 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &763146125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 763146126}
+  - component: {fileID: 763146128}
+  - component: {fileID: 763146127}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &763146126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763146125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 854173781}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 120.24414}
+  m_SizeDelta: {x: 0, y: -240.4883}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &763146127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763146125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 72834f0d7499c441a8a34d9ebe5404e9, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &763146128
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763146125}
+  m_CullTransparentMesh: 1
 --- !u!1 &854173777
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +454,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2147166556}
+  - {fileID: 763146126}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -945,6 +1022,17 @@ MonoBehaviour:
     fly!  "
   - "As you continue his journey, you\u2019re able to use the ability of animals
     when you come in contact with them. Use the abilities to your advantage and survive! "
+  sceneImages:
+  - {fileID: 21300000, guid: 72834f0d7499c441a8a34d9ebe5404e9, type: 3}
+  - {fileID: 21300000, guid: 2f6b9163a7749478d8b5acce7deeffff, type: 3}
+  - {fileID: 21300000, guid: 85732f388489545e0839df07853cbaf1, type: 3}
+  - {fileID: 21300000, guid: ee4ea3c598e7e445e9e993dbb314abf6, type: 3}
+  - {fileID: 21300000, guid: f264180682fc8471caa2d636c83af5db, type: 3}
+  - {fileID: 21300000, guid: 2ac88535518cc42c598fcfdc9464fd4d, type: 3}
+  - {fileID: 21300000, guid: d0012278695c742508f506673eccb25b, type: 3}
+  - {fileID: 21300000, guid: 61cd66fc17a524f6eb99ab9aeef8bfa0, type: 3}
+  - {fileID: 21300000, guid: 42d80f61537c048a6a71ca72e5b84cfa, type: 3}
+  currentImage: {fileID: 763146127}
   Dialogue: {fileID: 1583012918}
   index: 0
 --- !u!4 &2024094690
