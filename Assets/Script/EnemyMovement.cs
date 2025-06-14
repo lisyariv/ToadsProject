@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    //[SerializeField] private Animator anim;
+    [SerializeField] private Animator anim;
     [SerializeField] private float speed;
     [SerializeField] public float leftPatrolX, rightPatrolX;
     [SerializeField] private float minPauseTime, maxPauseTime;
@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         randomTime = Random.Range(minWalkTime, maxWalkTime);
-        //anim.SetBool("isWalking", isWalking ? true : false);
+        anim.SetInteger("facingDirection", facingDirection);
     }
 
     // Update is called once per frame
