@@ -3696,6 +3696,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 446311633}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &446311633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6182,6 +6183,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 985357127}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &985357127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8244,6 +8246,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 1410819964}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &1410819964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8519,6 +8522,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 1433972674}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &1433972674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8682,6 +8686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443012110}
   - component: {fileID: 1443012109}
+  - component: {fileID: 1443012111}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8720,6 +8725,9 @@ MonoBehaviour:
   TaskText: {fileID: 1981504559}
   frog: {fileID: 164247972}
   shelters: []
+  music: {fileID: 1443012111}
+  clip1: {fileID: 8300000, guid: 3c87463ecbffd4efda23bed9c83e7866, type: 3}
+  clip2: {fileID: 8300000, guid: 0cb593ef7971e4175b1b56629f7f1cf5, type: 3}
 --- !u!4 &1443012110
 Transform:
   m_ObjectHideFlags: 0
@@ -8735,6 +8743,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1443012111
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443012108}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1461801610
 GameObject:
   m_ObjectHideFlags: 0
@@ -9683,6 +9787,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 1638409531}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &1638409533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10126,6 +10231,7 @@ MonoBehaviour:
   hp: 0
   EM: {fileID: 1663185683}
   TargetSeen: 0
+  musicPlayed: 0
 --- !u!114 &1663185683
 MonoBehaviour:
   m_ObjectHideFlags: 0

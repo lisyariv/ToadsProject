@@ -17,6 +17,7 @@ public class EnemyDetectionScript : MonoBehaviour
     public EnemyMovement EM;
    
     public bool TargetSeen;
+    public bool musicPlayed;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,13 +36,24 @@ public class EnemyDetectionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TargetSeen && !gameManager.isInBush)
+        if (TargetSeen)
         {
-            NM.Track();
-            status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
+            if (!gameManager.isInBush)
+            {
+                NM.Track();
+                status.text = "You were detected by a predator! Run to a bush to lose their focus on you";
+            }
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player" && !musicPlayed)
+        {
+            gameManager.music.clip = gameManager.clip2;
+            gameManager.music.Play();
+        }
+    }
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -59,8 +71,6 @@ public class EnemyDetectionScript : MonoBehaviour
             if (gameManager.isInBush == false)
             {
                 TargetSeen = true;
-               
-
                 attackTimer += Time.deltaTime;
                 if (attackTimer >= 2f)
                 {

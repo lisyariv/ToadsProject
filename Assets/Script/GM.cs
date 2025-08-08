@@ -32,10 +32,13 @@ public class GM : MonoBehaviour
 
     public List<GameObject> shelters;
 
+    public AudioSource music;
+    public AudioClip clip1;
+    public AudioClip clip2;
     // Start is called before the first frame update
     void Start()
     {
-
+        
         GameObject[] objectsShelters = GameObject.FindGameObjectsWithTag("Shelter");
         shelters = new List<GameObject>(objectsShelters);
         diedFromPred = false;
@@ -48,6 +51,8 @@ public class GM : MonoBehaviour
         preyCount = 0;
         isFlyCollected = false;
         isNightTime = false;
+        music.clip = clip1;
+        music.Play();
         GameText.text = "Your energy is low! Find and consume prey to replenish your energy. Collect at least 5.";
         KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump.";
         TaskText.text = "Prey Collected: " + preyCount;
@@ -67,7 +72,7 @@ public class GM : MonoBehaviour
 
     void TimeInGame()
     {
-       
+        
         if (!foundShelter && isFlyCollected == true && deadFrog == false && isGameFinished == false)
         {
             TaskText.text = "Prey Collected: " + preyCount;
