@@ -3629,6 +3629,7 @@ GameObject:
   - component: {fileID: 446311630}
   - component: {fileID: 446311638}
   - component: {fileID: 446311639}
+  - component: {fileID: 446311640}
   m_Layer: 0
   m_Name: Snake (2)
   m_TagString: Predator
@@ -3850,6 +3851,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &446311640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446311628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &457443454
 GameObject:
   m_ObjectHideFlags: 0
@@ -6116,6 +6130,7 @@ GameObject:
   - component: {fileID: 985357124}
   - component: {fileID: 985357132}
   - component: {fileID: 985357133}
+  - component: {fileID: 985357134}
   m_Layer: 0
   m_Name: Snake (1)
   m_TagString: Predator
@@ -6337,6 +6352,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &985357134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985357122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &1049255065
 GameObject:
   m_ObjectHideFlags: 0
@@ -8179,6 +8207,7 @@ GameObject:
   - component: {fileID: 1410819961}
   - component: {fileID: 1410819969}
   - component: {fileID: 1410819970}
+  - component: {fileID: 1410819971}
   m_Layer: 0
   m_Name: Snake (4)
   m_TagString: Predator
@@ -8400,6 +8429,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1410819971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410819959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &1433213662
 GameObject:
   m_ObjectHideFlags: 0
@@ -8455,6 +8497,7 @@ GameObject:
   - component: {fileID: 1433972671}
   - component: {fileID: 1433972680}
   - component: {fileID: 1433972681}
+  - component: {fileID: 1433972682}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Predator
@@ -8676,6 +8719,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1433972682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433972669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &1443012108
 GameObject:
   m_ObjectHideFlags: 0
@@ -9715,6 +9771,7 @@ GameObject:
   - component: {fileID: 1638409530}
   - component: {fileID: 1638409538}
   - component: {fileID: 1638409539}
+  - component: {fileID: 1638409540}
   m_Layer: 0
   m_Name: Snake (5)
   m_TagString: Predator
@@ -9936,6 +9993,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1638409540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638409528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &1639843767
 GameObject:
   m_ObjectHideFlags: 0
@@ -10164,6 +10234,7 @@ GameObject:
   - component: {fileID: 1663185680}
   - component: {fileID: 1663185688}
   - component: {fileID: 1663185689}
+  - component: {fileID: 1663185690}
   m_Layer: 0
   m_Name: Snake (3)
   m_TagString: Predator
@@ -10385,6 +10456,19 @@ CapsuleCollider:
   m_Height: 3.84
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1663185690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663185678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d865073ff79b70848b7719a4862df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXZAxis: 0
 --- !u!1 &1682614781
 GameObject:
   m_ObjectHideFlags: 0

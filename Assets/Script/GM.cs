@@ -86,7 +86,7 @@ public class GM : MonoBehaviour
             KeysText.text = "Controls: WASD or Arrow Keys to move, SPACE to jump, F to fly, E to speed up.";
         }
 
-        if (frog.staminaBar.value <= 0f && preyCount >= 1 && isGameFinished == false && diedFromPred == true)
+        if (frog.staminaBar.value <= 0f && isGameFinished == false && diedFromPred == true)
         {
             deadFrog = true;
             GameText.text = "You became the predator's next meal. Try again?";
@@ -94,7 +94,7 @@ public class GM : MonoBehaviour
             SceneManager.LoadScene("LoseScene");
 
         }
-        if (diedFromPred == false && isGameFinished == false && preyCount >= 1 && frog.staminaBar.value <= 0f)
+        if (diedFromPred == false && isGameFinished == false && frog.staminaBar.value <= 0f)
         {
             GameText.text = "You passed out from a lack of stamina. Try again?";
             isGameFinished = true;
@@ -157,7 +157,7 @@ public class GM : MonoBehaviour
         {
             GameText.text = "You remained unprotected in the dark, causing predators to feast upon you. Try again?";
             isGameFinished = true;
-
+            SceneManager.LoadScene("LoseScene");
         }
     }
 }
