@@ -6,66 +6,303 @@ using TMPro;
 
 public class FrogMovement : MonoBehaviour
 {
+    public Animator anim;
+
     public Vector3 moveDirection;
-    public float speed = 5.0f;
     public Vector3 jumpMovement;
     public Vector3 flyMovement;
+
+    public float speed = 5.0f;
+    public float timer;
+    public float timer1;
+
     public bool canJump;
     public bool canFly;
-    public GameObject player;
+    public bool canSpeed;
+    public bool onGround;
+    public bool isFacingRight;
+    public bool frogSwitch;
+    public bool isMoving;
+    public bool isFlying;
+    public bool shelterCreated;
+    public bool shelterCreating;
+    public bool isSnake;
+
+    public Rigidbody player;
+
     public Slider staminaBar;
+    public Slider buildingBar;
+
     public GM gameManager;
     public TMP_Text StaminaTxt;
+    public List<Sprite> frogSprites;
+    public SpriteRenderer frogRenderer;
+    public int animIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        buildingBar.gameObject.SetActive(false);
         staminaBar.gameObject.SetActive(true);
         staminaBar.maxValue = 5f;
-        staminaBar.value = 0;
+        buildingBar.maxValue = 3f;
+        buildingBar.value = 0f;
+        staminaBar.value = 0.1f;
         StaminaTxt.text = "Stamina Bar";
         canJump = false;
         canFly = false;
+        onGround = false;
+        canSpeed = false;
+        frogSwitch = false;
+        isFlying = false;
+        shelterCreated = false;
+        shelterCreating = false;
+        anim = GetComponent<Animator>();
+
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       //Moving left to right
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector3(x, 0, z);
-        transform.Translate(moveDirection * Time.deltaTime * speed);
-
-        //Jumping 
-        if (canJump == true && Input.GetKey(KeyCode.Space))
+        //Moving left to right
+        if (gameManager.deadFrog == false && gameManager.isGameFinished == false) 
         {
-            canJump = false;
-            GetComponent<Rigidbody>().AddForce(jumpMovement);
+            player.isKinematic = false;
+
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+
+            moveDirection = new Vector3(x, 0, z);
+            transform.Translate(moveDirection * Time.deltaTime * speed);
+            
+            if(x == 0 && z == 0)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            //Animation
+
+            anim.SetBool("isMoving", isMoving);
+            anim.SetInteger("facing", animIndex);
+            anim.SetBool("isSnake", isSnake);
+
+           if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+           {
+                animIndex = 0;
+                if (frogSwitch == true)
+                {
+                    isSnake = true;
+                    frogRenderer.sprite = frogSprites[3];
+                }
+                else
+                {
+                    isSnake = false;
+                    frogRenderer.sprite = frogSprites[0];
+                }
+                
+           }
+          
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                animIndex = 2;
+                if (frogSwitch == true)
+                {
+                    isSnake = true;
+                    frogRenderer.sprite = frogSprites[5];
+                }
+                else
+                {
+                    isSnake = false;
+                    frogRenderer.sprite = frogSprites[2];
+                }
+
+               
+            }
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+               
+                animIndex = 1;
+                if (frogSwitch == true)
+                {
+                    isSnake = true;
+                    frogRenderer.sprite = frogSprites[4];
+                }
+                else
+                {
+                    isSnake = false;
+                    frogRenderer.sprite = frogSprites[1];
+                }
+                frogRenderer.flipX = false;
+               
+            }
+            if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                animIndex = 1;
+                if (frogSwitch == true)
+                {
+                    isSnake = true;
+                    frogRenderer.sprite = frogSprites[4];
+                }
+                else
+                {
+                    isSnake = false;
+                    frogRenderer.sprite = frogSprites[1];
+                }
+                frogRenderer.flipX = true;
+               
+            }
+
+            //Jumping 
+            if (canJump == true && Input.GetKey(KeyCode.Space))
+            {
+                canJump = false;
+                GetComponent<Rigidbody>().AddForce(jumpMovement);
+               
+            }
+
+            //Flying
+            if (canFly == true && gameManager.isFlyCollected == true && Input.GetKey(KeyCode.F))
+            {
+                GetComponent<Rigidbody>().AddForce(flyMovement);
+                staminaBar.value -= 0.01f;
+                isFlying = true;
+            }
+
+            //Speeding
+            if(canSpeed == true && Input.GetKey(KeyCode.E))
+            {
+                frogSwitch = true;
+                speed = 10f;
+                timer += Time.deltaTime;
+                if(timer >= 2f)
+                {
+                    staminaBar.value -= 0.5f;
+                    timer = 0;
+                }
+            }
+            else
+            {
+                speed = 5f;
+                frogSwitch = false;
+            }
+
+            if(gameManager.foundShelter == true && shelterCreated == false)
+            {
+                    BuildShelter();
+            }
+
+        }
+        else if(onGround == false && gameManager.isCollecting == true)
+        {
+            player.isKinematic = true;
         }
 
-        //Flying
-        if (canFly == true && Input.GetKey(KeyCode.F))
-        {
-            GetComponent<Rigidbody>().AddForce(flyMovement);
-        }
+       
         //Adding to Stamina Bar
-        if(gameManager.preyCount == 1)
+        if(gameManager.preyCount >= 1 && gameManager.isCollected == true)
         {
+            gameManager.isCollected = false;
             staminaBar.value += 1;
-            gameManager.preyCount = 0;
             Debug.Log(staminaBar.value);
         }
     }
-
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bush")
+        {
+            gameManager.isInBush = true;
+        }
+        if (other.gameObject.tag == "Shelter" && shelterCreated == false)
+        {
+            gameManager.GameText.text = "You can build your shelter here.";
+        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Bush")
+        {
+            gameManager.isInBush = true;
+        }
+        if (other.gameObject.tag == "Shelter")
+        {
+            if(!shelterCreated)
+            {
+                gameManager.GameText.text = "You can build your shelter here. Press R to create your shelter.";
+                gameManager.foundShelter = true;
+            }
+            if (shelterCreated)
+            {
+                gameManager.inShelter = true;
+            }
+        }
+        
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Bush")
+        {
+            StartCoroutine(BushWait());
+        }
+        if (other.gameObject.tag == "Shelter")
+        {
+            gameManager.inShelter = false;
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             canJump = true;
             canFly = true;
+            onGround = true;
+            gameManager.canFollowTarget = true;
+        }
+        
+        if (collision.gameObject.tag == "Predator")
+        {
+            canSpeed = true;
+        }
+        if(collision.gameObject.tag == "Material")
+        {
+            Destroy(collision.gameObject);
+            gameManager.matCount += 1;
         }
     }
-    
+
+    IEnumerator BushWait()
+    {
+        yield return new WaitForSeconds(5f);
+        gameManager.isInBush = false;
+    }
+
+    void BuildShelter()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            shelterCreating = true;
+        }
+        if (shelterCreating)
+        {
+            buildingBar.gameObject.SetActive(true);
+            timer1 += Time.deltaTime;
+            buildingBar.value = timer1;
+            Debug.Log(timer1);
+        }
+        if(buildingBar.value >= 2f)
+        {
+            shelterCreating = false;
+            shelterCreated = true;
+            buildingBar.gameObject.SetActive(false);
+            gameManager.GameText.text = "Shelter has been created! You can go to your shelter once night time falls.";
+        }
+       
+    }
 }

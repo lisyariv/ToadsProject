@@ -7,6 +7,14 @@ TagManager:
   - Ground
   - Prey
   - StaminaBar
+  - fly
+  - Bush
+  - Shelter
+  - Predator
+  - Stick
+  - Leaf
+  - Material
+  - ShelterUsed
   layers:
   - Default
   - TransparentFX
